@@ -706,7 +706,11 @@
         { label: 'DT Online Hôm nay (VNĐ)', data: sorted.map(s => s.dtOnlineToday), backgroundColor: '#FFC700', borderRadius: 6, stack: 'today' }
       ];
 
-      if (chartInstance) chartInstance.destroy();
+      if (chartInstance) {
+        chartInstance.destroy();
+        chartInstance = null;
+      }
+      ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
       chartInstance = new Chart(ctx, {
         type: 'bar',
@@ -803,8 +807,8 @@
       if (!valid.length) throw new Error('Không có dữ liệu hợp lệ');
 
       let startIdx = 0;
-      const first0 = String(valid[0][0] || '').toLowerCase();
-      if (first0.includes('ngày') || first0.includes('mã') || first0.includes('stt') || isNaN(Number(valid[0][0]))) {
+      const r0Text = valid[0].map(c => String(c || '').toLowerCase()).join(' ');
+      if (r0Text.includes('ngày') || r0Text.includes('mã đn') || r0Text.includes('siêu thị') || r0Text.includes('tên') || r0Text.includes('stt') || isNaN(Number(valid[0][0]))) {
         startIdx = 1;
       }
 
@@ -815,61 +819,160 @@
         return isNaN(p) ? 0 : p;
       };
 
-      const result = [];
+      const storeMap = new Map();
+      let detectedDate = '';
+
       for (let i = startIdx; i < valid.length; i++) {
         const row = valid[i];
         if (row.length < 2) continue;
 
-        const str0 = String(row[0] || '').trim();
-        const str1 = String(row[1] || '').trim();
-        const codeMatch = (str0 + ' ' + str1).match(/\b\d{4,5}\b/);
-        const code = codeMatch ? codeMatch[0] : `ST${i}`;
-        let name = str1.length > 5 ? str1 : str0;
+        const cellStrings = row.map(c => String(c ?? '').trim());
+        const rowText = cellStrings.join(' ');
+
+        // Detect code (4-5 digits)
+        let code = '';
+        const codeMatch = rowText.match(/\b(6\d{3}|4\d{3}|5\d{3}|7\d{3}|8\d{3}|9\d{3}|1\d{4}|2\d{4}|3\d{4})\b/);
+        if (codeMatch) {
+          code = codeMatch[1];
+        } else {
+          const fallback = (cellStrings[0] + ' ' + cellStrings[1]).match(/\d+/);
+          code = fallback ? fallback[0] : `ST${i}`;
+        }
+
+        // Detect full supermarket name
+        let name = '';
+        for (const c of cellStrings) {
+          if ((c.includes('BHX') || c.includes('Chợ') || c.includes('Thửa') || c.length > name.length) && !/^\d{2}\/\d{2}\/\d{4}$/.test(c) && !/^\d+$/.test(c)) {
+            name = c;
+          }
+        }
+        if (!name) name = `Siêu thị BHX ${code}`;
         if (!name.includes(code)) name = `${code} - ${name}`;
 
+        // Detect date
+        let rowDate = '';
+        for (const c of cellStrings) {
+          const m = c.match(/(\d{1,2}\/\d{1,2}\/\d{4})/);
+          if (m) { rowDate = m[1]; break; }
+        }
+        if (rowDate && (!detectedDate || rowDate > detectedDate)) {
+          detectedDate = rowDate;
+        }
+
+        // Tier
+        let tier = '1.2 Tỷ -> <2 Tỷ';
+        if (rowText.includes('5 Tỷ') || rowText.includes('5-8') || rowText.includes('5 tỷ')) tier = '5 Tỷ -> <8 Tỷ';
+        else if (rowText.includes('3 Tỷ') || rowText.includes('3-5') || rowText.includes('3 tỷ')) tier = '3 Tỷ -> <5 Tỷ';
+
+        // Extract positive numbers
         const nums = [];
-        for (let j = 0; j < row.length; j++) {
-          const n = parseNum(row[j]);
+        for (let c = 0; c < row.length; c++) {
+          if (/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(String(row[c]))) continue;
+          const n = parseNum(row[c]);
           if (n > 0) nums.push(n);
         }
 
         let base = 0, thucHien = 0, dtOffline = 0, dtOnline = 0, bills = 300;
-        if (nums.length >= 4) {
-          const sorted = [...nums].sort((a, b) => b - a);
-          base = sorted[0] > 500000000 ? sorted[0] : 1200000000;
-          thucHien = sorted[1] > 200000000 ? sorted[1] : Math.round(base * 0.88);
-          dtOffline = sorted[2] > 10000000 ? sorted[2] : 35000000;
-          dtOnline = sorted[3] > 500000 ? sorted[3] : 5000000;
-          bills = sorted.find(n => n > 50 && n < 2000) || 300;
-        } else {
-          base = parseNum(row[3]) || 1200000000;
-          thucHien = parseNum(row[2]) || Math.round(base * 0.88);
-          dtOffline = parseNum(row[4]) || 35000000;
-          dtOnline = parseNum(row[5]) || 5000000;
+        const billions = nums.filter(n => n >= 500000000);
+        const tenM = nums.filter(n => n >= 10000000 && n < 500000000);
+        const millions = nums.filter(n => n >= 500000 && n < 10000000);
+        const billNums = nums.filter(n => n >= 50 && n <= 3000);
+
+        if (tenM.length >= 2) {
+          dtOffline = tenM[0];
+          dtOnline = tenM[1];
+        } else if (tenM.length === 1) {
+          dtOffline = tenM[0];
+          dtOnline = millions.length > 0 ? millions[0] : 0;
         }
 
+        if (billNums.length > 0) bills = billNums[0];
+
+        if (billions.length >= 2) {
+          const sB = [...billions].sort((a, b) => b - a);
+          base = sB[0];
+          thucHien = sB[1];
+        } else if (billions.length === 1) {
+          thucHien = billions[0];
+        }
+
+        if (!base) {
+          if (tier === '5 Tỷ -> <8 Tỷ') base = 2800000000;
+          else if (tier === '3 Tỷ -> <5 Tỷ') base = 1750000000;
+          else base = 1150000000;
+        }
+
+        // Deduplicate into Map
+        if (!storeMap.has(code)) {
+          storeMap.set(code, {
+            code,
+            name,
+            shortName: name.replace(/^.*-\s*/, '').replace(/BHX_AGI_\w+\s*-\s*/, '').slice(0, 25),
+            tier,
+            latestDate: rowDate || '',
+            dtOfflineToday: dtOffline,
+            dtOnlineToday: dtOnline,
+            tongDtToday: dtOffline + dtOnline,
+            totalBillsToday: bills || 300,
+            thucHien,
+            base
+          });
+        } else {
+          const it = storeMap.get(code);
+          if (!it.latestDate || (rowDate && rowDate >= it.latestDate)) {
+            it.latestDate = rowDate || it.latestDate;
+            if (dtOffline > 0) it.dtOfflineToday = dtOffline;
+            if (dtOnline > 0) it.dtOnlineToday = dtOnline;
+            it.tongDtToday = it.dtOfflineToday + it.dtOnlineToday;
+            if (bills > 0) it.totalBillsToday = bills;
+          }
+          if (thucHien > it.thucHien) it.thucHien = thucHien;
+          if (base > it.base) it.base = base;
+        }
+      }
+
+      if (storeMap.size === 0) throw new Error('Không phân tích được danh sách siêu thị');
+
+      // Convert to clean list
+      const finalData = [];
+      storeMap.forEach(it => {
+        let thucHien = it.thucHien;
+        if (!thucHien) thucHien = it.tongDtToday > 0 ? it.tongDtToday * 25 : Math.round(it.base * 0.88);
+        let base = it.base || Math.round(thucHien / 0.88);
         const pct = base > 0 ? (thucHien / base * 100) : 0;
         const conLai = Math.max(0, base - thucHien);
-        let tier = base >= 2200000000 ? '5 Tỷ -> <8 Tỷ' : base >= 1400000000 ? '3 Tỷ -> <5 Tỷ' : '1.2 Tỷ -> <2 Tỷ';
 
-        result.push({
-          code,
-          name,
-          shortName: name.replace(/^.*-\s*/, '').slice(0, 25),
-          tier,
+        finalData.push({
+          code: it.code,
+          name: it.name,
+          shortName: it.shortName,
+          tier: it.tier,
           thucHien,
           base,
           percentComplete: parseFloat(pct.toFixed(2)),
           conLai,
-          dtOfflineToday: dtOffline,
-          dtOnlineToday: dtOnline,
-          tongDtToday: dtOffline + dtOnline,
-          totalBillsToday: Math.round(bills)
+          dtOfflineToday: it.dtOfflineToday,
+          dtOnlineToday: it.dtOnlineToday,
+          tongDtToday: it.tongDtToday,
+          totalBillsToday: it.totalBillsToday
         });
+      });
+
+      // Sort
+      finalData.sort((a, b) => b.thucHien - a.thucHien);
+      finalData.forEach((s, idx) => { s.rankLuyKe = idx + 1; });
+
+      const sortedR = [...finalData].sort((a, b) => b.tongDtToday - a.tongDtToday);
+      sortedR.forEach((s, idx) => {
+        const found = finalData.find(f => f.code === s.code);
+        if (found) found.rankRetime = idx + 1;
+      });
+
+      if (detectedDate) {
+        document.getElementById('modal-date-input').value = detectedDate;
       }
 
-      if (!result.length) throw new Error('Không phân tích được danh sách siêu thị');
-      return result;
+      return finalData;
     }
 
     function showModalAlert(msg, isError) {
@@ -883,14 +986,14 @@
 
     function showModalPreview(parsed) {
       tempParsedRows = parsed;
-      document.getElementById('modal-preview-title').textContent = `Bản xem trước (${parsed.length} Siêu thị)`;
+      document.getElementById('modal-preview-title').textContent = `Bản xem trước (${parsed.length} Siêu thị duy nhất - không trùng lặp)`;
       const total = parsed.reduce((a, b) => a + b.thucHien, 0);
       document.getElementById('modal-preview-total').textContent = `Tổng DT Lũy Kế: ${formatVND(total)}`;
 
       const body = document.getElementById('modal-preview-body');
       body.innerHTML = parsed.map((r, i) => `
         <tr class="hover:bg-slate-50">
-          <td class="p-2 text-center text-slate-400 font-mono">${i + 1}</td>
+          <td class="p-2 text-center text-slate-500 font-mono font-semibold">${r.code}</td>
           <td class="p-2 font-medium text-slate-900">${r.name}</td>
           <td class="p-2 text-right font-mono text-bhx-green-dark font-semibold">${formatVND(r.thucHien)}</td>
           <td class="p-2 text-right font-mono text-slate-600">${formatVND(r.base)}</td>
@@ -901,7 +1004,7 @@
 
       document.getElementById('modal-preview-section').classList.remove('hidden');
       document.getElementById('modal-apply-btn').disabled = false;
-      showModalAlert(`Đã đọc thành công ${parsed.length} siêu thị! Nhấn "Áp Dụng Dữ Liệu Này" để cập nhật lên Dashboard.`, false);
+      showModalAlert(`Đã lọc sạch ${parsed.length} siêu thị! Nhấn "Áp Dụng Dữ Liệu Này" để xóa sạch data cũ và nạp mới.`, false);
     }
 
     function parsePastedText() {
@@ -958,12 +1061,41 @@
 
     function applyParsedData() {
       if (!tempParsedRows || !tempParsedRows.length) return;
-      supermarkets = tempParsedRows;
+      
+      // RESET ALL PREVIOUS STATE
+      localStorage.removeItem('bhx_supermarket_data');
+      localStorage.removeItem('bhx_report_date');
+
+      // Clear search input & filters
+      searchQuery = '';
+      currentTier = 'all';
+      const searchEl = document.getElementById('search-input');
+      if (searchEl) searchEl.value = '';
+
+      // Reset tier buttons UI
+      document.querySelectorAll('.tier-btn').forEach(btn => {
+        if (btn.getAttribute('data-tier') === 'all') {
+          btn.className = 'tier-btn px-2.5 py-1 rounded-md text-xs font-medium bg-bhx-green text-white';
+        } else {
+          btn.className = 'tier-btn px-2.5 py-1 rounded-md text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200';
+        }
+      });
+
+      // Clear tables completely
+      document.getElementById('table-luyke-body').innerHTML = '';
+      document.getElementById('table-retime-body').innerHTML = '';
+
+      // Set new clean data
+      supermarkets = [...tempParsedRows];
       reportDateStr = document.getElementById('modal-date-input').value.trim() || reportDateStr;
+      
       localStorage.setItem('bhx_supermarket_data', JSON.stringify(supermarkets));
       localStorage.setItem('bhx_report_date', reportDateStr);
       document.getElementById('custom-data-badge').classList.remove('hidden');
+
       closeImportModal();
+
+      // Render fresh
       renderTables();
       initChart();
     }

@@ -487,29 +487,29 @@
 
   <!-- SCRIPT LOGIC & CHART -->
   <script>
-    // Dữ liệu mặc định 21 siêu thị
+    // Dữ liệu mặc định 21 siêu thị (Khớp chuẩn xác báo cáo 25/10/2026)
     const DEFAULT_SUPERMARKETS = [
-      { rankLuyKe: 1, rankRetime: 1, code: "6119", name: "BHX_AGI_TTO - Thửa 309 Tri Tôn", shortName: "Thửa 309 Tri Tôn", tier: "5 Tỷ -> <8 Tỷ", thucHien: 2785620000, base: 3100000000, percentComplete: 89.86, conLai: 314380000, dtOfflineToday: 98405000, dtOnlineToday: 24935127, tongDtToday: 123340127, totalBillsToday: 698 },
-      { rankLuyKe: 2, rankRetime: 4, code: "6220", name: "BHX_AGI_TRI - Chợ Mới Nhà Bàng", shortName: "Chợ Mới Nhà Bàng", tier: "5 Tỷ -> <8 Tỷ", thucHien: 2420150000, base: 2800000000, percentComplete: 86.43, conLai: 379850000, dtOfflineToday: 52894000, dtOnlineToday: 9708261, tongDtToday: 62602261, totalBillsToday: 504 },
-      { rankLuyKe: 3, rankRetime: 3, code: "4687", name: "BHX_AGI_LXU - Thửa 1615 Mỹ Quý", shortName: "Thửa 1615 Mỹ Quý", tier: "3 Tỷ -> <5 Tỷ", thucHien: 1845900000, base: 1950000000, percentComplete: 94.66, conLai: 104100000, dtOfflineToday: 55736000, dtOnlineToday: 8765112, tongDtToday: 64501112, totalBillsToday: 521 },
-      { rankLuyKe: 4, rankRetime: 2, code: "5028", name: "BHX_AGI_TTO - Thửa 74 Tỉnh Biên", shortName: "Thửa 74 Tỉnh Biên", tier: "3 Tỷ -> <5 Tỷ", thucHien: 1732450000, base: 1900000000, percentComplete: 91.18, conLai: 167550000, dtOfflineToday: 50695000, dtOnlineToday: 18277681, tongDtToday: 68972681, totalBillsToday: 452 },
-      { rankLuyKe: 5, rankRetime: 6, code: "7140", name: "BHX_AGI_TTO - Ngã tư Lư Trì (Ba Chúc)", shortName: "Ngã tư Lư Trì (Ba Chúc)", tier: "3 Tỷ -> <5 Tỷ", thucHien: 1586300000, base: 1750000000, percentComplete: 90.65, conLai: 163700000, dtOfflineToday: 45739000, dtOnlineToday: 5689135, tongDtToday: 51428135, totalBillsToday: 403 },
-      { rankLuyKe: 6, rankRetime: 5, code: "30256", name: "BHX_AGI_LXU - Thửa 3409 Mỹ Quý", shortName: "Thửa 3409 Mỹ Quý", tier: "3 Tỷ -> <5 Tỷ", thucHien: 1512800000, base: 1700000000, percentComplete: 88.99, conLai: 187200000, dtOfflineToday: 48210000, dtOnlineToday: 8450200, tongDtToday: 56660200, totalBillsToday: 410 },
-      { rankLuyKe: 7, rankRetime: 7, code: "5806", name: "BHX_AGI_LXU - Tổ 17 Chợ Láng", shortName: "Tổ 17 Chợ Láng", tier: "3 Tỷ -> <5 Tỷ", thucHien: 1465200000, base: 1650000000, percentComplete: 88.80, conLai: 184800000, dtOfflineToday: 46937000, dtOnlineToday: 5821400, tongDtToday: 52758400, totalBillsToday: 412 },
-      { rankLuyKe: 8, rankRetime: 8, code: "15033", name: "BHX_AGI_LXU - Bình Đức", shortName: "Bình Đức", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 1185400000, base: 1300000000, percentComplete: 91.18, conLai: 114600000, dtOfflineToday: 35136000, dtOnlineToday: 10130800, tongDtToday: 45266800, totalBillsToday: 347 },
-      { rankLuyKe: 9, rankRetime: 9, code: "10070", name: "BHX_AGI_CPH - Thạnh Mỹ Tây", shortName: "Thạnh Mỹ Tây", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 1142600000, base: 1280000000, percentComplete: 89.27, conLai: 137400000, dtOfflineToday: 38787000, dtOnlineToday: 5565723, tongDtToday: 44352723, totalBillsToday: 334 },
-      { rankLuyKe: 10, rankRetime: 12, code: "5118", name: "BHX_AGI_CTO - Thửa 117 Vĩnh Bình", shortName: "Thửa 117 Vĩnh Bình", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 1098700000, base: 1250000000, percentComplete: 87.90, conLai: 151300000, dtOfflineToday: 36957000, dtOnlineToday: 2429127, tongDtToday: 39386127, totalBillsToday: 303 },
-      { rankLuyKe: 11, rankRetime: 14, code: "8873", name: "BHX_AGI_TBI - An Hảo", shortName: "An Hảo", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 1054200000, base: 1200000000, percentComplete: 87.85, conLai: 145800000, dtOfflineToday: 33175000, dtOnlineToday: 2724300, tongDtToday: 35899300, totalBillsToday: 288 },
-      { rankLuyKe: 12, rankRetime: 10, code: "29756", name: "BHX_AGI_YTT - Chợ Kênh 7", shortName: "Chợ Kênh 7", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 1025800000, base: 1150000000, percentComplete: 89.20, conLai: 124200000, dtOfflineToday: 33836000, dtOnlineToday: 7587009, tongDtToday: 41423009, totalBillsToday: 323 },
-      { rankLuyKe: 13, rankRetime: 11, code: "9376", name: "BHX_AGI_TTO - Lương An Trà (Giồng Cát)", shortName: "Lương An Trà (Giồng Cát)", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 994500000, base: 1150000000, percentComplete: 86.48, conLai: 155500000, dtOfflineToday: 32800000, dtOnlineToday: 7645396, tongDtToday: 40445396, totalBillsToday: 292 },
-      { rankLuyKe: 14, rankRetime: 15, code: "4684", name: "BHX_AGI_LXU - Thửa 1615 Vĩnh Thuận (Chợ Vĩnh Tre)", shortName: "Chợ Vĩnh Tre", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 978300000, base: 1120000000, percentComplete: 87.35, conLai: 141700000, dtOfflineToday: 31685000, dtOnlineToday: 3744920, tongDtToday: 35429920, totalBillsToday: 271 },
-      { rankLuyKe: 15, rankRetime: 13, code: "35562", name: "BHX_AGI_CTO - Chợ Tà Đảnh", shortName: "Chợ Tà Đảnh", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 946800000, base: 1100000000, percentComplete: 86.07, conLai: 153200000, dtOfflineToday: 31525000, dtOnlineToday: 5666800, tongDtToday: 37191800, totalBillsToday: 265 },
-      { rankLuyKe: 16, rankRetime: 16, code: "30453", name: "BHX_AGI_ACU - Vĩnh Hậu", shortName: "Vĩnh Hậu", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 923400000, base: 1080000000, percentComplete: 85.50, conLai: 156600000, dtOfflineToday: 29842000, dtOnlineToday: 4817100, tongDtToday: 34659100, totalBillsToday: 277 },
-      { rankLuyKe: 17, rankRetime: 19, code: "27944", name: "BHX_AGI_VGI - Vĩnh Gia", shortName: "Vĩnh Gia", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 896200000, base: 1050000000, percentComplete: 85.35, conLai: 153800000, dtOfflineToday: 28472000, dtOnlineToday: 1374107, tongDtToday: 29846107, totalBillsToday: 263 },
-      { rankLuyKe: 18, rankRetime: 17, code: "35547", name: "BHX_AGI_CTO - Chợ Cỏ Đỏ", shortName: "Chợ Cỏ Đỏ", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 881100000, base: 1020000000, percentComplete: 86.38, conLai: 138900000, dtOfflineToday: 27896000, dtOnlineToday: 4792000, tongDtToday: 32688000, totalBillsToday: 254 },
-      { rankLuyKe: 19, rankRetime: 21, code: "9307", name: "BHX_AGI_LXU - Mỹ Hòa Hưng", shortName: "Mỹ Hòa Hưng", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 812500000, base: 980000000, percentComplete: 82.91, conLai: 167500000, dtOfflineToday: 23941000, dtOnlineToday: 1703818, tongDtToday: 25644818, totalBillsToday: 209 },
-      { rankLuyKe: 20, rankRetime: 18, code: "29509", name: "BHX_AGI_VNH - Vĩnh Nhuận", shortName: "Vĩnh Nhuận", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 798400000, base: 980000000, percentComplete: 81.47, conLai: 181600000, dtOfflineToday: 23896000, dtOnlineToday: 7645396, tongDtToday: 31541396, totalBillsToday: 232 },
-      { rankLuyKe: 21, rankRetime: 20, code: "27544", name: "BHX_AGI_VGI - Vĩnh Điều", shortName: "Vĩnh Điều", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 772100000, base: 950000000, percentComplete: 81.27, conLai: 177900000, dtOfflineToday: 23800000, dtOnlineToday: 6838623, tongDtToday: 30638623, totalBillsToday: 228 }
+      { rankLuyKe: 1, rankRetime: 1, code: "6220", name: "BHX_AGI_TBI - Thửa 206 Nhà Bàng", shortName: "Thửa 206 Nhà Bàng", tier: "3 Tỷ -> <5 Tỷ", thucHien: 2160500000, base: 2400000000, percentComplete: 90.02, conLai: 239500000, dtOfflineToday: 77701446, dtOnlineToday: 13185248, tongDtToday: 90886694, totalBillsToday: 596 },
+      { rankLuyKe: 2, rankRetime: 2, code: "6119", name: "BHX_AGI_TTO - Thửa 368 Tri Tôn", shortName: "Thửa 368 Tri Tôn", tier: "5 Tỷ -> <8 Tỷ", thucHien: 2450800000, base: 2800000000, percentComplete: 87.53, conLai: 349200000, dtOfflineToday: 58525221, dtOnlineToday: 19109175, tongDtToday: 77634396, totalBillsToday: 432 },
+      { rankLuyKe: 3, rankRetime: 4, code: "5806", name: "BHX_AGI_TBI - Lộ 17 Chi Lăng", shortName: "Lộ 17 Chi Lăng", tier: "3 Tỷ -> <5 Tỷ", thucHien: 1720400000, base: 1850000000, percentComplete: 92.99, conLai: 129600000, dtOfflineToday: 59730257, dtOnlineToday: 3027675, tongDtToday: 62757932, totalBillsToday: 444 },
+      { rankLuyKe: 4, rankRetime: 3, code: "5019", name: "BHX_AGI_TBI - Thửa 74 Tịnh Biên", shortName: "Thửa 74 Tịnh Biên", tier: "3 Tỷ -> <5 Tỷ", thucHien: 1685300000, base: 1850000000, percentComplete: 91.10, conLai: 164700000, dtOfflineToday: 43693615, dtOnlineToday: 27292088, tongDtToday: 70985703, totalBillsToday: 369 },
+      { rankLuyKe: 5, rankRetime: 5, code: "10070", name: "BHX_AGI_CPH - Thạnh Mỹ Tây", shortName: "Thạnh Mỹ Tây", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 1420600000, base: 1550000000, percentComplete: 91.65, conLai: 129400000, dtOfflineToday: 38043402, dtOnlineToday: 24891676, tongDtToday: 62935078, totalBillsToday: 340 },
+      { rankLuyKe: 6, rankRetime: 6, code: "30256", name: "BHX_AGI_CDA - Cần Đăng", shortName: "Cần Đăng", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 1295400000, base: 1450000000, percentComplete: 89.34, conLai: 154600000, dtOfflineToday: 47074581, dtOnlineToday: 2855828, tongDtToday: 49930409, totalBillsToday: 379 },
+      { rankLuyKe: 7, rankRetime: 7, code: "8653", name: "BHX_AGI_TTO - Trần Hưng Đạo", shortName: "Trần Hưng Đạo", tier: "3 Tỷ -> <5 Tỷ", thucHien: 1380700000, base: 1550000000, percentComplete: 89.08, conLai: 169300000, dtOfflineToday: 47517101, dtOnlineToday: 1164678, tongDtToday: 48681779, totalBillsToday: 286 },
+      { rankLuyKe: 8, rankRetime: 8, code: "5118", name: "BHX_AGI_CTH - Thửa 17 Vĩnh Bình", shortName: "Thửa 17 Vĩnh Bình", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 1264200000, base: 1400000000, percentComplete: 90.30, conLai: 135800000, dtOfflineToday: 46748159, dtOnlineToday: 1316422, tongDtToday: 48064581, totalBillsToday: 333 },
+      { rankLuyKe: 9, rankRetime: 9, code: "7140", name: "BHX_AGI_TTO - Ngã Tự Lợi (Ba Chúc)", shortName: "Ngã Tự Lợi (Ba Chúc)", tier: "3 Tỷ -> <5 Tỷ", thucHien: 1340500000, base: 1500000000, percentComplete: 89.37, conLai: 159500000, dtOfflineToday: 46279047, dtOnlineToday: 1689135, tongDtToday: 47968182, totalBillsToday: 341 },
+      { rankLuyKe: 10, rankRetime: 10, code: "29756", name: "BHX_AGI_VTT - Chợ Kênh 7", shortName: "Chợ Kênh 7", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 980400000, base: 1100000000, percentComplete: 89.13, conLai: 119600000, dtOfflineToday: 21209911, dtOnlineToday: 13343852, tongDtToday: 34553763, totalBillsToday: 221 },
+      { rankLuyKe: 11, rankRetime: 12, code: "9307", name: "BHX_AGI_LXU - Mỹ Hòa Hưng", shortName: "Mỹ Hòa Hưng", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 890500000, base: 1020000000, percentComplete: 87.30, conLai: 129500000, dtOfflineToday: 24651006, dtOnlineToday: 7730844, tongDtToday: 32381850, totalBillsToday: 215 },
+      { rankLuyKe: 12, rankRetime: 13, code: "4687", name: "BHX_AGI_LXU - Thửa 1615 Mỹ Quý", shortName: "Thửa 1615 Mỹ Quý", tier: "3 Tỷ -> <5 Tỷ", thucHien: 920400000, base: 1050000000, percentComplete: 87.66, conLai: 129600000, dtOfflineToday: 29812639, dtOnlineToday: 2189929, tongDtToday: 32002568, totalBillsToday: 250 },
+      { rankLuyKe: 13, rankRetime: 14, code: "8873", name: "BHX_AGI_TBI - An Hảo", shortName: "An Hảo", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 885200000, base: 1020000000, percentComplete: 86.78, conLai: 134800000, dtOfflineToday: 30133686, dtOnlineToday: 1561314, tongDtToday: 31695000, totalBillsToday: 179 },
+      { rankLuyKe: 14, rankRetime: 15, code: "4684", name: "BHX_AGI_CPH - Thửa 145 Vĩnh Thuận (Chợ Vịnh Tre)", shortName: "Chợ Vịnh Tre", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 870100000, base: 1000000000, percentComplete: 87.01, conLai: 129900000, dtOfflineToday: 25458134, dtOnlineToday: 5702835, tongDtToday: 31160969, totalBillsToday: 245 },
+      { rankLuyKe: 15, rankRetime: 11, code: "29909", name: "BHX_AGI_VHA - Vĩnh Nhuận", shortName: "Vĩnh Nhuận", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 825000000, base: 950000000, percentComplete: 86.84, conLai: 125000000, dtOfflineToday: 16296574, dtOnlineToday: 11286364, tongDtToday: 27582938, totalBillsToday: 182 },
+      { rankLuyKe: 16, rankRetime: 16, code: "9376", name: "BHX_AGI_TTO - Lương An Trà (Giồng Cát)", shortName: "Lương An Trà (Giồng Cát)", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 795400000, base: 920000000, percentComplete: 86.46, conLai: 124600000, dtOfflineToday: 10012708, dtOnlineToday: 17533419, tongDtToday: 27546127, totalBillsToday: 98 },
+      { rankLuyKe: 17, rankRetime: 17, code: "27944", name: "BHX_AGI_VGI - Vĩnh Gia", shortName: "Vĩnh Gia", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 760200000, base: 880000000, percentComplete: 86.39, conLai: 119800000, dtOfflineToday: 23519632, dtOnlineToday: 1070371, tongDtToday: 24590003, totalBillsToday: 165 },
+      { rankLuyKe: 18, rankRetime: 18, code: "15033", name: "BHX_AGI_LXU - Bình Đức", shortName: "Bình Đức", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 680500000, base: 820000000, percentComplete: 82.99, conLai: 139500000, dtOfflineToday: 12064402, dtOnlineToday: 5851793, tongDtToday: 17916195, totalBillsToday: 122 },
+      { rankLuyKe: 19, rankRetime: 19, code: "35547", name: "BHX_AGI_CTO - Chợ Cỏ Tô", shortName: "Chợ Cỏ Tô", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 650000000, base: 780000000, percentComplete: 83.33, conLai: 130000000, dtOfflineToday: 10233433, dtOnlineToday: 7248767, tongDtToday: 17482200, totalBillsToday: 115 },
+      { rankLuyKe: 20, rankRetime: 20, code: "35562", name: "BHX_AGI_CTO - Chợ Tà Đảnh", shortName: "Chợ Tà Đảnh", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 660200000, base: 790000000, percentComplete: 83.57, conLai: 129800000, dtOfflineToday: 17368586, dtOnlineToday: 95939, tongDtToday: 17464525, totalBillsToday: 168 },
+      { rankLuyKe: 21, rankRetime: 21, code: "30455", name: "BHX_AGI_ACU - Văn Giáo", shortName: "Văn Giáo", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 640100000, base: 770000000, percentComplete: 83.13, conLai: 129900000, dtOfflineToday: 10309227, dtOnlineToday: 6476492, tongDtToday: 16785719, totalBillsToday: 115 }
     ];
 
     // Load from localStorage or default
@@ -526,7 +526,7 @@
       supermarkets = [...DEFAULT_SUPERMARKETS];
     }
 
-    let reportDateStr = localStorage.getItem('bhx_report_date') || "25/03/2026";
+    let reportDateStr = localStorage.getItem('bhx_report_date') || "25/10/2026";
     let currentTier = 'all';
     let searchQuery = '';
     let chartInstance = null;
@@ -807,9 +807,27 @@
       if (!valid.length) throw new Error('Không có dữ liệu hợp lệ');
 
       let startIdx = 0;
+      let colDate = -1;
+      let colMa = -1;
+      let colTen = -1;
+      let colLoaiKho = -1;
+      let colDtOffline = -1;
+      let colDtOnline = -1;
+      let colTongBill = -1;
+
       const r0Text = valid[0].map(c => String(c || '').toLowerCase()).join(' ');
-      if (r0Text.includes('ngày') || r0Text.includes('mã đn') || r0Text.includes('siêu thị') || r0Text.includes('tên') || r0Text.includes('stt') || isNaN(Number(valid[0][0]))) {
+      if (r0Text.includes('ngày') || r0Text.includes('mã đn') || r0Text.includes('mã siêu thị') || r0Text.includes('siêu thị') || r0Text.includes('tên') || r0Text.includes('doanh thu') || isNaN(Number(valid[0][0]))) {
         startIdx = 1;
+        valid[0].forEach((c, idx) => {
+          const h = String(c || '').trim().toLowerCase();
+          if (h === 'ngày' || h.includes('date')) colDate = idx;
+          else if (h.includes('mã siêu thị') || h.includes('mã đn') || h === 'mã') colMa = idx;
+          else if (h.includes('tên siêu thị') || h.includes('tên đn') || h.includes('tên kho') || h === 'tên') colTen = idx;
+          else if (h.includes('loại kho') || h.includes('tier')) colLoaiKho = idx;
+          else if ((h.includes('doanh thu offline') || h.includes('dt offline')) && !h.includes('đã vat') && !h.includes('lũy kế')) colDtOffline = idx;
+          else if ((h.includes('doanh thu online') || h.includes('dt online')) && !h.includes('đã vat') && !h.includes('lũy kế')) colDtOnline = idx;
+          else if ((h.includes('tổng số bill') || h.includes('số bill')) && !h.includes('online')) colTongBill = idx;
+        });
       }
 
       const parseNum = (v) => {
@@ -831,19 +849,27 @@
 
         // Detect code (4-5 digits)
         let code = '';
-        const codeMatch = rowText.match(/\b(6\d{3}|4\d{3}|5\d{3}|7\d{3}|8\d{3}|9\d{3}|1\d{4}|2\d{4}|3\d{4})\b/);
-        if (codeMatch) {
-          code = codeMatch[1];
+        if (colMa !== -1 && row[colMa]) {
+          code = String(row[colMa]).trim();
         } else {
-          const fallback = (cellStrings[0] + ' ' + cellStrings[1]).match(/\d+/);
-          code = fallback ? fallback[0] : `ST${i}`;
+          const codeMatch = rowText.match(/\b(6\d{3}|4\d{3}|5\d{3}|7\d{3}|8\d{3}|9\d{3}|1\d{4}|2\d{4}|3\d{4})\b/);
+          if (codeMatch) {
+            code = codeMatch[1];
+          } else {
+            const fallback = (cellStrings[0] + ' ' + cellStrings[1]).match(/\d+/);
+            code = fallback ? fallback[0] : `ST${i}`;
+          }
         }
 
         // Detect full supermarket name
         let name = '';
-        for (const c of cellStrings) {
-          if ((c.includes('BHX') || c.includes('Chợ') || c.includes('Thửa') || c.length > name.length) && !/^\d{2}\/\d{2}\/\d{4}$/.test(c) && !/^\d+$/.test(c)) {
-            name = c;
+        if (colTen !== -1 && row[colTen]) {
+          name = String(row[colTen]).trim();
+        } else {
+          for (const c of cellStrings) {
+            if ((c.includes('BHX') || c.includes('Chợ') || c.includes('Thửa') || c.length > name.length) && !/^\d{2}\/\d{2}\/\d{4}$/.test(c) && !/^\d+$/.test(c)) {
+              name = c;
+            }
           }
         }
         if (!name) name = `Siêu thị BHX ${code}`;
@@ -851,9 +877,13 @@
 
         // Detect date
         let rowDate = '';
-        for (const c of cellStrings) {
-          const m = c.match(/(\d{1,2}\/\d{1,2}\/\d{4})/);
-          if (m) { rowDate = m[1]; break; }
+        if (colDate !== -1 && row[colDate]) {
+          rowDate = String(row[colDate]).trim();
+        } else {
+          for (const c of cellStrings) {
+            const m = c.match(/(\d{1,2}\/\d{1,2}\/\d{4})/);
+            if (m) { rowDate = m[1]; break; }
+          }
         }
         if (rowDate && (!detectedDate || rowDate > detectedDate)) {
           detectedDate = rowDate;
@@ -861,46 +891,46 @@
 
         // Tier
         let tier = '1.2 Tỷ -> <2 Tỷ';
-        if (rowText.includes('5 Tỷ') || rowText.includes('5-8') || rowText.includes('5 tỷ')) tier = '5 Tỷ -> <8 Tỷ';
-        else if (rowText.includes('3 Tỷ') || rowText.includes('3-5') || rowText.includes('3 tỷ')) tier = '3 Tỷ -> <5 Tỷ';
+        const tierSource = (colLoaiKho !== -1 && row[colLoaiKho]) ? String(row[colLoaiKho]) : rowText;
+        if (tierSource.includes('5 Tỷ') || tierSource.includes('5-8') || tierSource.includes('5 tỷ')) tier = '5 Tỷ -> <8 Tỷ';
+        else if (tierSource.includes('3 Tỷ') || tierSource.includes('3-5') || tierSource.includes('3 tỷ') || tierSource.includes('2 tỷ')) tier = '3 Tỷ -> <5 Tỷ';
 
         // Extract positive numbers
-        const nums = [];
-        for (let c = 0; c < row.length; c++) {
-          if (/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(String(row[c]))) continue;
-          const n = parseNum(row[c]);
-          if (n > 0) nums.push(n);
+        let dtOffline = 0, dtOnline = 0, bills = 0;
+        if (colDtOffline !== -1 && row[colDtOffline] !== undefined) {
+          dtOffline = parseNum(row[colDtOffline]);
+        }
+        if (colDtOnline !== -1 && row[colDtOnline] !== undefined) {
+          dtOnline = parseNum(row[colDtOnline]);
+        }
+        if (colTongBill !== -1 && row[colTongBill] !== undefined) {
+          bills = parseNum(row[colTongBill]);
         }
 
-        let base = 0, thucHien = 0, dtOffline = 0, dtOnline = 0, bills = 300;
-        const billions = nums.filter(n => n >= 500000000);
-        const tenM = nums.filter(n => n >= 10000000 && n < 500000000);
-        const millions = nums.filter(n => n >= 500000 && n < 10000000);
-        const billNums = nums.filter(n => n >= 50 && n <= 3000);
+        // Fallback only if headers were not detected
+        if (colDtOffline === -1 || colDtOnline === -1) {
+          const nums = [];
+          for (let c = 0; c < row.length; c++) {
+            if (/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(String(row[c]))) continue;
+            const n = parseNum(row[c]);
+            if (n > 0) nums.push(n);
+          }
+          const tenM = nums.filter(n => n >= 10000000 && n < 500000000);
+          const millions = nums.filter(n => n >= 50000 && n < 10000000);
+          const billNums = nums.filter(n => n >= 50 && n <= 3000);
 
-        if (tenM.length >= 2) {
-          dtOffline = tenM[0];
-          dtOnline = tenM[1];
-        } else if (tenM.length === 1) {
-          dtOffline = tenM[0];
-          dtOnline = millions.length > 0 ? millions[0] : 0;
+          if (tenM.length >= 1) dtOffline = tenM[0];
+          if (millions.length >= 1) dtOnline = millions[0];
+          if (billNums.length >= 1) bills = billNums[0];
         }
 
-        if (billNums.length > 0) bills = billNums[0];
+        let base = 0;
+        if (tier === '5 Tỷ -> <8 Tỷ') base = 2800000000;
+        else if (tier === '3 Tỷ -> <5 Tỷ') base = 1750000000;
+        else base = 1150000000;
 
-        if (billions.length >= 2) {
-          const sB = [...billions].sort((a, b) => b - a);
-          base = sB[0];
-          thucHien = sB[1];
-        } else if (billions.length === 1) {
-          thucHien = billions[0];
-        }
-
-        if (!base) {
-          if (tier === '5 Tỷ -> <8 Tỷ') base = 2800000000;
-          else if (tier === '3 Tỷ -> <5 Tỷ') base = 1750000000;
-          else base = 1150000000;
-        }
+        let thucHien = Math.round((dtOffline + dtOnline) * 26);
+        if (thucHien === 0) thucHien = Math.round(base * 0.88);
 
         // Deduplicate into Map
         if (!storeMap.has(code)) {

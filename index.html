@@ -1,18 +1,20 @@
 <!DOCTYPE html>
-<!-- saved from url=(0059)file:///Users/lenhandt/Downloads/bachhoaxanh_dashboard.html -->
-<html lang="vi"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bách Hóa Xanh - Dashboard Báo Cáo Kinh Doanh Siêu Thị</title>
   <meta name="description" content="Dashboard báo cáo doanh thu chuỗi siêu thị Bách Hóa Xanh - Khu vực Tỉnh An Giang">
   <!-- Tailwind CSS CDN -->
-  <script src="./index_files/saved_resource"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
   <!-- Chart.js CDN -->
-  <script src="./index_files/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- SheetJS (XLSX) CDN for Excel reading -->
+  <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
   <!-- Google Fonts: Plus Jakarta Sans -->
-  <link rel="preconnect" href="https://fonts.googleapis.com/">
-  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
-  <link href="./index_files/css2" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
       theme: {
@@ -25,8 +27,7 @@
               yellow: '#FFC700',
               'yellow-light': '#FFF066',
               'yellow-dark': '#E5A800',
-              surface: '#F4F7F5',
-              dark: '#14281D'
+              surface: '#F4F7F5'
             }
           },
           fontFamily: {
@@ -43,36 +44,23 @@
       background-color: #F4F7F5;
       color: #1a2e22;
     }
-    .custom-scrollbar::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
-    }
-    .custom-scrollbar::-webkit-scrollbar-track {
-      background: #edf2ee;
-    }
-    .custom-scrollbar::-webkit-scrollbar-thumb {
-      background: #c3d9cb;
-      border-radius: 4px;
-    }
-    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-      background: #007738;
-    }
+    .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: #edf2ee; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #c3d9cb; border-radius: 4px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #007738; }
     @media print {
       .no-print { display: none !important; }
       body { background: white; }
     }
   </style>
-<script src="file:///_aistudio-iframe.js?v=6634132a"></script><style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:"Plus Jakarta Sans", sans-serif;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:"JetBrains Mono", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.absolute{position:absolute}.relative{position:relative}.sticky{position:sticky}.left-3{left:0.75rem}.top-0{top:0px}.top-1\/2{top:50%}.z-30{z-index:30}.mx-auto{margin-left:auto;margin-right:auto}.mb-1\.5{margin-bottom:0.375rem}.mb-3{margin-bottom:0.75rem}.mb-4{margin-bottom:1rem}.mt-0\.5{margin-top:0.125rem}.mt-2\.5{margin-top:0.625rem}.mt-8{margin-top:2rem}.mb-1{margin-bottom:0.25rem}.inline-block{display:inline-block}.flex{display:flex}.inline-flex{display:inline-flex}.grid{display:grid}.hidden{display:none}.h-11{height:2.75rem}.h-2{height:0.5rem}.h-2\.5{height:0.625rem}.h-4{height:1rem}.h-5{height:1.25rem}.h-\[320px\]{height:320px}.h-6{height:1.5rem}.min-h-screen{min-height:100vh}.w-11{width:2.75rem}.w-14{width:3.5rem}.w-2{width:0.5rem}.w-2\.5{width:0.625rem}.w-4{width:1rem}.w-44{width:11rem}.w-5{width:1.25rem}.w-full{width:100%}.w-6{width:1.5rem}.max-w-7xl{max-width:80rem}.max-w-md{max-width:28rem}.flex-1{flex:1 1 0%}.flex-shrink-0{flex-shrink:0}.-translate-y-1\/2{--tw-translate-y:-50%;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}@keyframes pulse{50%{opacity:.5}}.animate-pulse{animation:pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-1\.5{gap:0.375rem}.gap-2{gap:0.5rem}.gap-3{gap:0.75rem}.gap-4{gap:1rem}.space-x-3\.5 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.875rem * var(--tw-space-x-reverse));margin-left:calc(0.875rem * calc(1 - var(--tw-space-x-reverse)))}.space-y-6 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem * var(--tw-space-y-reverse))}.divide-y > :not([hidden]) ~ :not([hidden]){--tw-divide-y-reverse:0;border-top-width:calc(1px * calc(1 - var(--tw-divide-y-reverse)));border-bottom-width:calc(1px * var(--tw-divide-y-reverse))}.divide-slate-100 > :not([hidden]) ~ :not([hidden]){--tw-divide-opacity:1;border-color:rgb(241 245 249 / var(--tw-divide-opacity, 1))}.self-start{align-self:flex-start}.overflow-hidden{overflow:hidden}.overflow-x-auto{overflow-x:auto}.whitespace-nowrap{white-space:nowrap}.rounded{border-radius:0.25rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:0.5rem}.rounded-md{border-radius:0.375rem}.rounded-xl{border-radius:0.75rem}.border{border-width:1px}.border-b{border-bottom-width:1px}.border-b-2{border-bottom-width:2px}.border-b-4{border-bottom-width:4px}.border-t{border-top-width:1px}.border-t-2{border-top-width:2px}.border-amber-600{--tw-border-opacity:1;border-color:rgb(217 119 6 / var(--tw-border-opacity, 1))}.border-bhx-green{--tw-border-opacity:1;border-color:rgb(0 119 56 / var(--tw-border-opacity, 1))}.border-bhx-yellow{--tw-border-opacity:1;border-color:rgb(255 199 0 / var(--tw-border-opacity, 1))}.border-emerald-900\/10{border-color:rgb(6 78 59 / 0.1)}.border-slate-100{--tw-border-opacity:1;border-color:rgb(241 245 249 / var(--tw-border-opacity, 1))}.border-slate-200{--tw-border-opacity:1;border-color:rgb(226 232 240 / var(--tw-border-opacity, 1))}.border-white\/20{border-color:rgb(255 255 255 / 0.2)}.bg-amber-50{--tw-bg-opacity:1;background-color:rgb(255 251 235 / var(--tw-bg-opacity, 1))}.bg-amber-50\/80{background-color:rgb(255 251 235 / 0.8)}.bg-bhx-green{--tw-bg-opacity:1;background-color:rgb(0 119 56 / var(--tw-bg-opacity, 1))}.bg-bhx-yellow{--tw-bg-opacity:1;background-color:rgb(255 199 0 / var(--tw-bg-opacity, 1))}.bg-emerald-400{--tw-bg-opacity:1;background-color:rgb(52 211 153 / var(--tw-bg-opacity, 1))}.bg-emerald-50{--tw-bg-opacity:1;background-color:rgb(236 253 245 / var(--tw-bg-opacity, 1))}.bg-emerald-50\/80{background-color:rgb(236 253 245 / 0.8)}.bg-slate-100{--tw-bg-opacity:1;background-color:rgb(241 245 249 / var(--tw-bg-opacity, 1))}.bg-slate-50{--tw-bg-opacity:1;background-color:rgb(248 250 252 / var(--tw-bg-opacity, 1))}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.bg-white\/10{background-color:rgb(255 255 255 / 0.1)}.bg-amber-400{--tw-bg-opacity:1;background-color:rgb(251 191 36 / var(--tw-bg-opacity, 1))}.bg-amber-50\/20{background-color:rgb(255 251 235 / 0.2)}.bg-amber-50\/30{background-color:rgb(255 251 235 / 0.3)}.bg-amber-500{--tw-bg-opacity:1;background-color:rgb(245 158 11 / var(--tw-bg-opacity, 1))}.bg-amber-600{--tw-bg-opacity:1;background-color:rgb(217 119 6 / var(--tw-bg-opacity, 1))}.bg-orange-500{--tw-bg-opacity:1;background-color:rgb(249 115 22 / var(--tw-bg-opacity, 1))}.bg-slate-300{--tw-bg-opacity:1;background-color:rgb(203 213 225 / var(--tw-bg-opacity, 1))}.bg-gradient-to-r{background-image:linear-gradient(to right, var(--tw-gradient-stops))}.from-amber-700{--tw-gradient-from:#b45309 var(--tw-gradient-from-position);--tw-gradient-to:rgb(180 83 9 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-bhx-green-dark{--tw-gradient-from:#005427 var(--tw-gradient-from-position);--tw-gradient-to:rgb(0 84 39 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.via-bhx-green{--tw-gradient-to:rgb(0 119 56 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), #007738 var(--tw-gradient-via-position), var(--tw-gradient-to)}.to-amber-600{--tw-gradient-to:#d97706 var(--tw-gradient-to-position)}.to-bhx-green{--tw-gradient-to:#007738 var(--tw-gradient-to-position)}.to-bhx-green-light{--tw-gradient-to:#028c46 var(--tw-gradient-to-position)}.p-1{padding:0.25rem}.p-1\.5{padding:0.375rem}.p-3{padding:0.75rem}.p-4{padding:1rem}.px-2{padding-left:0.5rem;padding-right:0.5rem}.px-2\.5{padding-left:0.625rem;padding-right:0.625rem}.px-3{padding-left:0.75rem;padding-right:0.75rem}.px-4{padding-left:1rem;padding-right:1rem}.py-0\.5{padding-top:0.125rem;padding-bottom:0.125rem}.py-1{padding-top:0.25rem;padding-bottom:0.25rem}.py-1\.5{padding-top:0.375rem;padding-bottom:0.375rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.py-3\.5{padding-top:0.875rem;padding-bottom:0.875rem}.py-5{padding-top:1.25rem;padding-bottom:1.25rem}.py-6{padding-top:1.5rem;padding-bottom:1.5rem}.pb-3{padding-bottom:0.75rem}.pl-9{padding-left:2.25rem}.pr-4{padding-right:1rem}.pt-2{padding-top:0.5rem}.text-left{text-align:left}.text-center{text-align:center}.text-right{text-align:right}.font-mono{font-family:"JetBrains Mono", monospace}.text-\[10px\]{font-size:10px}.text-\[11px\]{font-size:11px}.text-base{font-size:1rem;line-height:1.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.font-bold{font-weight:700}.font-extrabold{font-weight:800}.font-medium{font-weight:500}.font-normal{font-weight:400}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.tracking-tight{letter-spacing:-0.025em}.tracking-wide{letter-spacing:0.025em}.tracking-wider{letter-spacing:0.05em}.tracking-widest{letter-spacing:0.1em}.text-amber-100{--tw-text-opacity:1;color:rgb(254 243 199 / var(--tw-text-opacity, 1))}.text-amber-700{--tw-text-opacity:1;color:rgb(180 83 9 / var(--tw-text-opacity, 1))}.text-amber-900{--tw-text-opacity:1;color:rgb(120 53 15 / var(--tw-text-opacity, 1))}.text-bhx-green{--tw-text-opacity:1;color:rgb(0 119 56 / var(--tw-text-opacity, 1))}.text-bhx-green-dark{--tw-text-opacity:1;color:rgb(0 84 39 / var(--tw-text-opacity, 1))}.text-bhx-yellow{--tw-text-opacity:1;color:rgb(255 199 0 / var(--tw-text-opacity, 1))}.text-emerald-100{--tw-text-opacity:1;color:rgb(209 250 229 / var(--tw-text-opacity, 1))}.text-emerald-200{--tw-text-opacity:1;color:rgb(167 243 208 / var(--tw-text-opacity, 1))}.text-emerald-700{--tw-text-opacity:1;color:rgb(4 120 87 / var(--tw-text-opacity, 1))}.text-rose-600{--tw-text-opacity:1;color:rgb(225 29 72 / var(--tw-text-opacity, 1))}.text-slate-400{--tw-text-opacity:1;color:rgb(148 163 184 / var(--tw-text-opacity, 1))}.text-slate-500{--tw-text-opacity:1;color:rgb(100 116 139 / var(--tw-text-opacity, 1))}.text-slate-600{--tw-text-opacity:1;color:rgb(71 85 105 / var(--tw-text-opacity, 1))}.text-slate-700{--tw-text-opacity:1;color:rgb(51 65 85 / var(--tw-text-opacity, 1))}.text-slate-900{--tw-text-opacity:1;color:rgb(15 23 42 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.text-amber-800{--tw-text-opacity:1;color:rgb(146 64 14 / var(--tw-text-opacity, 1))}.text-amber-950{--tw-text-opacity:1;color:rgb(69 26 3 / var(--tw-text-opacity, 1))}.text-emerald-800{--tw-text-opacity:1;color:rgb(6 95 70 / var(--tw-text-opacity, 1))}.text-slate-800{--tw-text-opacity:1;color:rgb(30 41 59 / var(--tw-text-opacity, 1))}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.shadow-md{--tw-shadow:0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-sm{--tw-shadow:0 1px 2px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.transition{transition-property:color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-500{transition-duration:500ms}.selection\:bg-bhx-yellow *::selection{--tw-bg-opacity:1;background-color:rgb(255 199 0 / var(--tw-bg-opacity, 1))}.selection\:text-bhx-green-dark *::selection{--tw-text-opacity:1;color:rgb(0 84 39 / var(--tw-text-opacity, 1))}.selection\:bg-bhx-yellow::selection{--tw-bg-opacity:1;background-color:rgb(255 199 0 / var(--tw-bg-opacity, 1))}.selection\:text-bhx-green-dark::selection{--tw-text-opacity:1;color:rgb(0 84 39 / var(--tw-text-opacity, 1))}.hover\:bg-slate-200:hover{--tw-bg-opacity:1;background-color:rgb(226 232 240 / var(--tw-bg-opacity, 1))}.hover\:bg-white\/20:hover{background-color:rgb(255 255 255 / 0.2)}.hover\:bg-slate-50\/80:hover{background-color:rgb(248 250 252 / 0.8)}.hover\:text-slate-900:hover{--tw-text-opacity:1;color:rgb(15 23 42 / var(--tw-text-opacity, 1))}.hover\:shadow-md:hover{--tw-shadow:0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.focus\:bg-white:focus{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.focus\:outline-none:focus{outline:2px solid transparent;outline-offset:2px}.focus\:ring-2:focus{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)}.focus\:ring-bhx-green:focus{--tw-ring-opacity:1;--tw-ring-color:rgb(0 119 56 / var(--tw-ring-opacity, 1))}@media (min-width: 640px){.sm\:inline{display:inline}.sm\:h-\[380px\]{height:380px}.sm\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.sm\:flex-row{flex-direction:row}.sm\:items-center{align-items:center}.sm\:gap-3{gap:0.75rem}.sm\:self-auto{align-self:auto}.sm\:p-4{padding:1rem}.sm\:p-6{padding:1.5rem}.sm\:px-6{padding-left:1.5rem;padding-right:1.5rem}.sm\:text-2xl{font-size:1.5rem;line-height:2rem}.sm\:text-base{font-size:1rem;line-height:1.5rem}.sm\:text-lg{font-size:1.125rem;line-height:1.75rem}.sm\:text-sm{font-size:0.875rem;line-height:1.25rem}.sm\:text-xl{font-size:1.25rem;line-height:1.75rem}}@media (min-width: 768px){.md\:flex{display:flex}.md\:flex-row{flex-direction:row}.md\:items-center{align-items:center}}@media (min-width: 1024px){.lg\:grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}.lg\:px-8{padding-left:2rem;padding-right:2rem}}</style></head>
+<script src="/_aistudio-iframe.js?v=6634132a"></script></head>
 <body class="min-h-screen flex flex-col antialiased selection:bg-bhx-yellow selection:text-bhx-green-dark">
 
   <!-- TOP BRAND HEADER -->
   <header class="bg-gradient-to-r from-bhx-green-dark via-bhx-green to-bhx-green-light text-white shadow-md border-b-4 border-bhx-yellow sticky top-0 z-30">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-18 py-2">
-        
-        <!-- Brand & Title -->
         <div class="flex items-center space-x-3.5">
-          <!-- Logo Badge -->
           <div class="w-11 h-11 bg-bhx-yellow rounded-xl flex items-center justify-center shadow-md text-bhx-green-dark font-extrabold text-xl tracking-tight flex-shrink-0">
             <span>BHX</span>
           </div>
@@ -80,28 +68,51 @@
             <div class="flex items-center gap-2">
               <span class="text-xs font-bold tracking-widest text-bhx-yellow uppercase">BÁCH HÓA XANH</span>
               <span class="text-xs text-emerald-200">·</span>
-              <span class="text-xs font-medium text-emerald-100">Khu vực Tỉnh An Giang</span>
+              <span class="text-xs font-medium text-emerald-100" id="header-store-count">Khu vực Tỉnh An Giang (21 Siêu thị)</span>
             </div>
-            <h1 class="text-lg sm:text-xl font-bold tracking-tight text-white flex items-center gap-2">
+            <h1 class="text-base sm:text-xl font-bold tracking-tight text-white">
               Báo Cáo Doanh Thu Kinh Doanh Siêu Thị
             </h1>
           </div>
         </div>
 
-        <!-- Right Quick Actions -->
         <div class="flex items-center gap-2 sm:gap-3">
-          <div class="hidden md:flex flex-col text-right">
-            <span class="text-xs text-emerald-200 font-medium">Cập nhật Retime</span>
-            <span class="text-xs font-semibold text-bhx-yellow" id="live-time">25/10/2026 · 15:30:06</span>
-          </div>
-          <button onclick="window.print()" class="no-print inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-white/10 hover:bg-white/20 text-white transition border border-white/20">
+          <!-- Button Cập Nhật Data Mới -->
+          <button onclick="openImportModal()" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold bg-bhx-yellow text-bhx-green-dark hover:bg-yellow-300 transition shadow-xs ring-2 ring-yellow-400/40">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"></path></svg>
+            <span>Cập Nhật Data Mới</span>
+          </button>
+
+          <button onclick="window.print()" class="no-print hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-white/10 hover:bg-white/20 text-white transition border border-white/20">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
-            <span class="hidden sm:inline">In Báo Cáo</span>
+            <span>In Báo Cáo</span>
           </button>
         </div>
       </div>
     </div>
   </header>
+
+  <!-- SUB-HEADER / NOTIFICATION BANNER -->
+  <div class="bg-emerald-900/10 border-b border-emerald-900/15 py-1.5 px-4 text-xs text-slate-700">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-1">
+      <div class="flex items-center gap-2">
+        <span class="flex h-2 w-2 relative">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-600"></span>
+        </span>
+        <span class="font-semibold text-bhx-green-dark">Dữ liệu Retime trực tiếp:</span>
+        <span id="banner-report-date">Ngày 25/03/2026</span>
+        <span id="custom-data-badge" class="hidden bg-emerald-100 text-emerald-800 text-[10px] font-bold px-1.5 py-0.5 rounded">
+          Dữ liệu đã cập nhật
+        </span>
+      </div>
+      <div class="flex items-center gap-3 text-slate-500 font-medium">
+        <span>Tiến độ hoàn thành: <b class="text-slate-800 font-mono" id="banner-progress">88.23%</b></span>
+        <span>·</span>
+        <span class="text-bhx-green font-semibold" id="banner-active-stores">21/21 Điểm bán kết nối POS</span>
+      </div>
+    </div>
+  </div>
 
   <!-- MAIN CONTAINER -->
   <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
@@ -113,11 +124,13 @@
           <span class="w-2.5 h-2.5 rounded-full bg-bhx-green"></span>
           Tổng quan chỉ số kinh doanh toàn khu vực
         </h2>
-        <span class="text-xs font-medium text-slate-500">21 Điểm bán đang mở cửa</span>
+        <div class="flex items-center gap-2 text-xs text-slate-500">
+          <span id="card-date-indicator">Cập nhật ngày 25/03/2026</span>
+          <button onclick="openImportModal()" class="text-bhx-green font-semibold hover:underline">[Đổi dữ liệu mới]</button>
+        </div>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        
         <!-- Card 1: Tổng Lũy Kế -->
         <div class="bg-white rounded-xl p-4 shadow-sm border border-emerald-900/10 hover:shadow-md transition">
           <div class="flex items-center justify-between text-slate-500 mb-1.5">
@@ -126,10 +139,12 @@
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
             </span>
           </div>
-          <div class="text-xl sm:text-2xl font-extrabold text-bhx-green-dark font-mono tracking-tight" id="stat-total-luyke">26.858.420.000 đ</div>
+          <div class="text-xl sm:text-2xl font-extrabold text-bhx-green-dark font-mono tracking-tight" id="stat-total-luyke">
+            27.651.350.000 đ
+          </div>
           <div class="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600">
-            <span>Base: <b class="font-mono text-slate-700">31.340.000.000 đ</b></span>
-            <span class="font-bold text-bhx-green bg-emerald-50 px-2 py-0.5 rounded text-[11px]">88,23%</span>
+            <span>Base: <b class="font-mono text-slate-700" id="stat-total-base">31.340.000.000 đ</b></span>
+            <span class="font-bold text-bhx-green bg-emerald-50 px-2 py-0.5 rounded text-[11px]" id="stat-avg-percent">88,23%</span>
           </div>
         </div>
 
@@ -141,10 +156,12 @@
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
             </span>
           </div>
-          <div class="text-xl sm:text-2xl font-extrabold text-amber-700 font-mono tracking-tight" id="stat-total-today">984.676.035 đ</div>
+          <div class="text-xl sm:text-2xl font-extrabold text-amber-700 font-mono tracking-tight" id="stat-total-today">
+            1.003.790.000 đ
+          </div>
           <div class="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600">
-            <span>Offline: <b class="font-mono text-slate-700">840,4 Tr</b></span>
-            <span>Online: <b class="font-mono text-emerald-700">163,4 Tr</b></span>
+            <span>Offline: <b class="font-mono text-slate-700" id="stat-offline-today">840,4 Tr</b></span>
+            <span>Online: <b class="font-mono text-emerald-700" id="stat-online-today">163,4 Tr</b></span>
           </div>
         </div>
 
@@ -156,7 +173,7 @@
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
             </span>
           </div>
-          <div class="text-xl sm:text-2xl font-extrabold text-bhx-green-dark font-mono tracking-tight">
+          <div class="text-xl sm:text-2xl font-extrabold text-bhx-green-dark font-mono tracking-tight" id="stat-store-count">
             21 / 21 <span class="text-sm font-normal text-slate-500">Điểm bán</span>
           </div>
           <div class="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600">
@@ -165,7 +182,7 @@
           </div>
         </div>
 
-        <!-- Card 4: Tổng Bills & Còn Lại Target -->
+        <!-- Card 4: Tổng Bills -->
         <div class="bg-white rounded-xl p-4 shadow-sm border border-emerald-900/10 hover:shadow-md transition">
           <div class="flex items-center justify-between text-slate-500 mb-1.5">
             <span class="text-xs font-semibold tracking-wide uppercase text-slate-600">Tổng Bill Hôm Nay</span>
@@ -173,17 +190,18 @@
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
             </span>
           </div>
-          <div class="text-xl sm:text-2xl font-extrabold text-slate-900 font-mono tracking-tight" id="stat-total-bills">7.286 <span class="text-sm font-normal text-slate-500">Hóa đơn</span></div>
+          <div class="text-xl sm:text-2xl font-extrabold text-slate-900 font-mono tracking-tight" id="stat-total-bills">
+            7.680 <span class="text-sm font-normal text-slate-500">Hóa đơn</span>
+          </div>
           <div class="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600">
             <span>Còn lại Base:</span>
-            <span class="font-mono font-bold text-rose-600">3.688.650.000 đ</span>
+            <span class="font-mono font-bold text-rose-600" id="stat-total-conlai">3.688.650.000 đ</span>
           </div>
         </div>
-
       </div>
     </section>
 
-    <!-- COLUMN CHART: TOP SIÊU THỊ DOANH THU CAO NHẤT -->
+    <!-- COLUMN CHART -->
     <section class="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-emerald-900/10">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 pb-3 border-b border-slate-100">
         <div>
@@ -194,7 +212,6 @@
           <p class="text-xs text-slate-500 mt-0.5">So sánh hiệu quả bán hàng giữa các chi nhánh dẫn đầu chuỗi Bách Hóa Xanh An Giang</p>
         </div>
 
-        <!-- Chart Mode Toggle Buttons -->
         <div class="flex items-center gap-1.5 p-1 bg-slate-100 rounded-lg text-xs font-semibold self-start sm:self-auto">
           <button id="btn-chart-luyke" onclick="switchChartMode('luyke')" class="px-3 py-1.5 rounded-md transition shadow-xs bg-bhx-green text-white">
             Top Lũy Kế
@@ -205,34 +222,37 @@
         </div>
       </div>
 
-      <!-- Chart Canvas Wrapper -->
       <div class="relative w-full h-[320px] sm:h-[380px]">
-        <canvas id="topRevenueChart" width="2332" height="760" style="display: block; box-sizing: border-box; height: 380px; width: 1166px;"></canvas>
+        <canvas id="topRevenueChart"></canvas>
       </div>
     </section>
 
     <!-- SEARCH & FILTER TOOLBAR -->
     <section class="bg-white rounded-xl p-3 sm:p-4 shadow-sm border border-emerald-900/10 flex flex-col md:flex-row md:items-center justify-between gap-3">
-      <!-- Search input -->
       <div class="relative flex-1 max-w-md">
         <svg class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-        <input type="text" id="search-input" onkeyup="handleFilterChange()" placeholder="Tìm tên siêu thị hoặc mã ĐN (vd: 6119, Tri Tôn)..." class="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-bhx-green focus:bg-white transition">
+        <input 
+          type="text" 
+          id="search-input" 
+          onkeyup="handleFilterChange()" 
+          placeholder="Tìm tên siêu thị hoặc mã ĐN (vd: 6119, Tri Tôn)..." 
+          class="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-bhx-green focus:bg-white transition"
+        >
       </div>
 
-      <!-- Tier Filters & Table View Selector -->
       <div class="flex flex-wrap items-center gap-2">
         <span class="text-xs font-semibold text-slate-500">Loại Kho:</span>
-        <button onclick="setTierFilter('all')" data-tier="all" class="tier-btn px-2.5 py-1 rounded-md text-xs font-medium bg-bhx-green text-white">Tất cả (21)</button>
-        <button onclick="setTierFilter('5 Tỷ -&gt; &lt;8 Tỷ')" data-tier="5 Tỷ -&gt; &lt;8 Tỷ" class="tier-btn px-2.5 py-1 rounded-md text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200">5 - 8 Tỷ (2)</button>
-        <button onclick="setTierFilter('3 Tỷ -&gt; &lt;5 Tỷ')" data-tier="3 Tỷ -&gt; &lt;5 Tỷ" class="tier-btn px-2.5 py-1 rounded-md text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200">3 - 5 Tỷ (5)</button>
-        <button onclick="setTierFilter('1.2 Tỷ -&gt; &lt;2 Tỷ')" data-tier="1.2 Tỷ -&gt; &lt;2 Tỷ" class="tier-btn px-2.5 py-1 rounded-md text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200">1.2 - 2 Tỷ (14)</button>
+        <button onclick="setTierFilter('all')" data-tier="all" class="tier-btn px-2.5 py-1 rounded-md text-xs font-medium bg-bhx-green text-white" id="filter-all-btn">Tất cả</button>
+        <button onclick="setTierFilter('5 Tỷ -> <8 Tỷ')" data-tier="5 Tỷ -> <8 Tỷ" class="tier-btn px-2.5 py-1 rounded-md text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200">5 - 8 Tỷ</button>
+        <button onclick="setTierFilter('3 Tỷ -> <5 Tỷ')" data-tier="3 Tỷ -> <5 Tỷ" class="tier-btn px-2.5 py-1 rounded-md text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200">3 - 5 Tỷ</button>
+        <button onclick="setTierFilter('1.2 Tỷ -> <2 Tỷ')" data-tier="1.2 Tỷ -> <2 Tỷ" class="tier-btn px-2.5 py-1 rounded-md text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200">1.2 - 2 Tỷ</button>
       </div>
     </section>
 
     <!-- TABLES SECTION -->
     <div class="space-y-6">
 
-      <!-- BẢNG 1: BÁO CÁO LŨY KẾ DOANH THU KHU VỰC -->
+      <!-- BẢNG 1: LŨY KẾ DOANH THU -->
       <section class="bg-white rounded-xl shadow-sm border border-emerald-900/10 overflow-hidden">
         <div class="bg-gradient-to-r from-bhx-green-dark to-bhx-green px-4 sm:px-6 py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b-2 border-bhx-yellow">
           <div>
@@ -240,7 +260,7 @@
               <span class="px-2 py-0.5 rounded text-[10px] font-extrabold uppercase bg-bhx-yellow text-bhx-green-dark">BẢNG 1</span>
               <h3 class="text-sm sm:text-base font-bold text-white tracking-tight">Báo Cáo Lũy Kế Doanh Thu Khu Vực</h3>
             </div>
-            <p class="text-xs text-emerald-100 mt-0.5">Theo dõi chỉ tiêu Base, doanh thu thực hiện lũy kế và tỷ lệ hoàn thành tháng 03/2026</p>
+            <p class="text-xs text-emerald-100 mt-0.5">Theo dõi chỉ tiêu Base, doanh thu thực hiện lũy kế và tỷ lệ hoàn thành</p>
           </div>
           <div class="text-xs text-emerald-100 font-medium">
             Tiến độ ngày: <span class="text-bhx-yellow font-bold font-mono">25/31 ngày (~80.6%)</span>
@@ -252,702 +272,22 @@
             <thead class="bg-slate-50 text-slate-600 uppercase text-[11px] font-bold tracking-wider border-b border-slate-200">
               <tr>
                 <th scope="col" class="py-3 px-3 text-center w-14">Xếp hạng</th>
-                <th scope="col" class="py-3 px-4">Tên Siêu Thị &amp; Mã ĐN</th>
+                <th scope="col" class="py-3 px-4">Tên Siêu Thị & Mã ĐN</th>
                 <th scope="col" class="py-3 px-4 text-right">Thực Hiện (VNĐ)</th>
                 <th scope="col" class="py-3 px-4 text-right">Base (VNĐ)</th>
                 <th scope="col" class="py-3 px-4 text-center w-44">% Hoàn Thành</th>
                 <th scope="col" class="py-3 px-4 text-right">Còn Lại (VNĐ)</th>
               </tr>
             </thead>
-            <tbody id="table-luyke-body" class="divide-y divide-slate-100 text-slate-700">
-            <tr class="hover:bg-slate-50/80 transition bg-amber-50/20">
-              <td class="py-3 px-3 text-center whitespace-nowrap"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-amber-400 text-amber-950 font-extrabold text-xs shadow-xs">1</span></td>
-              <td class="py-3 px-4">
-                <div class="font-bold text-slate-900 flex items-center gap-1.5">
-                  <span>BHX_AGI_TTO - Thửa 309 Tri Tôn</span>
-                </div>
-                <div class="text-[11px] text-slate-500 flex items-center gap-2 mt-0.5">
-                  <span class="font-mono font-medium text-slate-600">Mã: 6119</span>
-                  <span>·</span>
-                  <span class="text-bhx-green-dark font-medium">5 Tỷ -&gt; &lt;8 Tỷ</span>
-                </div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-bold text-bhx-green-dark whitespace-nowrap">
-                2.785.620.000 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-slate-600 whitespace-nowrap">
-                3.100.000.000 đ
-              </td>
-              <td class="py-3 px-4 text-center">
-                <div class="flex items-center justify-between text-xs mb-1">
-                  <span class="font-bold font-mono text-slate-800">89.86%</span>
-                  <span class="text-[10px] text-slate-500">Mục tiêu: 100%</span>
-                </div>
-                <div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
-                  <div class="bg-amber-500 h-2 rounded-full transition-all duration-500" style="width: 89.86%"></div>
-                </div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-semibold text-rose-600 whitespace-nowrap">
-                314.380.000 đ
-              </td>
-            </tr>
-          
-            <tr class="hover:bg-slate-50/80 transition bg-amber-50/20">
-              <td class="py-3 px-3 text-center whitespace-nowrap"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-slate-300 text-slate-800 font-extrabold text-xs shadow-xs">2</span></td>
-              <td class="py-3 px-4">
-                <div class="font-bold text-slate-900 flex items-center gap-1.5">
-                  <span>BHX_AGI_TRI - Chợ Mới Nhà Bàng</span>
-                </div>
-                <div class="text-[11px] text-slate-500 flex items-center gap-2 mt-0.5">
-                  <span class="font-mono font-medium text-slate-600">Mã: 6220</span>
-                  <span>·</span>
-                  <span class="text-bhx-green-dark font-medium">5 Tỷ -&gt; &lt;8 Tỷ</span>
-                </div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-bold text-bhx-green-dark whitespace-nowrap">
-                2.420.150.000 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-slate-600 whitespace-nowrap">
-                2.800.000.000 đ
-              </td>
-              <td class="py-3 px-4 text-center">
-                <div class="flex items-center justify-between text-xs mb-1">
-                  <span class="font-bold font-mono text-slate-800">86.43%</span>
-                  <span class="text-[10px] text-slate-500">Mục tiêu: 100%</span>
-                </div>
-                <div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
-                  <div class="bg-amber-500 h-2 rounded-full transition-all duration-500" style="width: 86.43%"></div>
-                </div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-semibold text-rose-600 whitespace-nowrap">
-                379.850.000 đ
-              </td>
-            </tr>
-          
-            <tr class="hover:bg-slate-50/80 transition bg-amber-50/20">
-              <td class="py-3 px-3 text-center whitespace-nowrap"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-amber-600 text-white font-extrabold text-xs shadow-xs">3</span></td>
-              <td class="py-3 px-4">
-                <div class="font-bold text-slate-900 flex items-center gap-1.5">
-                  <span>BHX_AGI_LXU - Thửa 1615 Mỹ Quý</span>
-                </div>
-                <div class="text-[11px] text-slate-500 flex items-center gap-2 mt-0.5">
-                  <span class="font-mono font-medium text-slate-600">Mã: 4687</span>
-                  <span>·</span>
-                  <span class="text-bhx-green-dark font-medium">3 Tỷ -&gt; &lt;5 Tỷ</span>
-                </div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-bold text-bhx-green-dark whitespace-nowrap">
-                1.845.900.000 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-slate-600 whitespace-nowrap">
-                1.950.000.000 đ
-              </td>
-              <td class="py-3 px-4 text-center">
-                <div class="flex items-center justify-between text-xs mb-1">
-                  <span class="font-bold font-mono text-bhx-green">94.66%</span>
-                  <span class="text-[10px] text-slate-500">Mục tiêu: 100%</span>
-                </div>
-                <div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
-                  <div class="bg-bhx-green h-2 rounded-full transition-all duration-500" style="width: 94.66%"></div>
-                </div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-semibold text-rose-600 whitespace-nowrap">
-                104.100.000 đ
-              </td>
-            </tr>
-          
-            <tr class="hover:bg-slate-50/80 transition ">
-              <td class="py-3 px-3 text-center whitespace-nowrap"><span class="inline-flex items-center justify-center w-6 h-6 text-slate-500 font-semibold text-xs">4</span></td>
-              <td class="py-3 px-4">
-                <div class="font-bold text-slate-900 flex items-center gap-1.5">
-                  <span>BHX_AGI_TTO - Thửa 74 Tỉnh Biên</span>
-                </div>
-                <div class="text-[11px] text-slate-500 flex items-center gap-2 mt-0.5">
-                  <span class="font-mono font-medium text-slate-600">Mã: 5028</span>
-                  <span>·</span>
-                  <span class="text-bhx-green-dark font-medium">3 Tỷ -&gt; &lt;5 Tỷ</span>
-                </div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-bold text-bhx-green-dark whitespace-nowrap">
-                1.732.450.000 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-slate-600 whitespace-nowrap">
-                1.900.000.000 đ
-              </td>
-              <td class="py-3 px-4 text-center">
-                <div class="flex items-center justify-between text-xs mb-1">
-                  <span class="font-bold font-mono text-bhx-green">91.18%</span>
-                  <span class="text-[10px] text-slate-500">Mục tiêu: 100%</span>
-                </div>
-                <div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
-                  <div class="bg-bhx-green h-2 rounded-full transition-all duration-500" style="width: 91.18%"></div>
-                </div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-semibold text-rose-600 whitespace-nowrap">
-                167.550.000 đ
-              </td>
-            </tr>
-          
-            <tr class="hover:bg-slate-50/80 transition ">
-              <td class="py-3 px-3 text-center whitespace-nowrap"><span class="inline-flex items-center justify-center w-6 h-6 text-slate-500 font-semibold text-xs">5</span></td>
-              <td class="py-3 px-4">
-                <div class="font-bold text-slate-900 flex items-center gap-1.5">
-                  <span>BHX_AGI_TTO - Ngã tư Lư Trì (Ba Chúc)</span>
-                </div>
-                <div class="text-[11px] text-slate-500 flex items-center gap-2 mt-0.5">
-                  <span class="font-mono font-medium text-slate-600">Mã: 7140</span>
-                  <span>·</span>
-                  <span class="text-bhx-green-dark font-medium">3 Tỷ -&gt; &lt;5 Tỷ</span>
-                </div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-bold text-bhx-green-dark whitespace-nowrap">
-                1.586.300.000 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-slate-600 whitespace-nowrap">
-                1.750.000.000 đ
-              </td>
-              <td class="py-3 px-4 text-center">
-                <div class="flex items-center justify-between text-xs mb-1">
-                  <span class="font-bold font-mono text-bhx-green">90.65%</span>
-                  <span class="text-[10px] text-slate-500">Mục tiêu: 100%</span>
-                </div>
-                <div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
-                  <div class="bg-bhx-green h-2 rounded-full transition-all duration-500" style="width: 90.65%"></div>
-                </div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-semibold text-rose-600 whitespace-nowrap">
-                163.700.000 đ
-              </td>
-            </tr>
-          
-            <tr class="hover:bg-slate-50/80 transition ">
-              <td class="py-3 px-3 text-center whitespace-nowrap"><span class="inline-flex items-center justify-center w-6 h-6 text-slate-500 font-semibold text-xs">6</span></td>
-              <td class="py-3 px-4">
-                <div class="font-bold text-slate-900 flex items-center gap-1.5">
-                  <span>BHX_AGI_LXU - Thửa 3409 Mỹ Quý</span>
-                </div>
-                <div class="text-[11px] text-slate-500 flex items-center gap-2 mt-0.5">
-                  <span class="font-mono font-medium text-slate-600">Mã: 30256</span>
-                  <span>·</span>
-                  <span class="text-bhx-green-dark font-medium">3 Tỷ -&gt; &lt;5 Tỷ</span>
-                </div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-bold text-bhx-green-dark whitespace-nowrap">
-                1.512.800.000 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-slate-600 whitespace-nowrap">
-                1.700.000.000 đ
-              </td>
-              <td class="py-3 px-4 text-center">
-                <div class="flex items-center justify-between text-xs mb-1">
-                  <span class="font-bold font-mono text-slate-800">88.99%</span>
-                  <span class="text-[10px] text-slate-500">Mục tiêu: 100%</span>
-                </div>
-                <div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
-                  <div class="bg-amber-500 h-2 rounded-full transition-all duration-500" style="width: 88.99%"></div>
-                </div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-semibold text-rose-600 whitespace-nowrap">
-                187.200.000 đ
-              </td>
-            </tr>
-          
-            <tr class="hover:bg-slate-50/80 transition ">
-              <td class="py-3 px-3 text-center whitespace-nowrap"><span class="inline-flex items-center justify-center w-6 h-6 text-slate-500 font-semibold text-xs">7</span></td>
-              <td class="py-3 px-4">
-                <div class="font-bold text-slate-900 flex items-center gap-1.5">
-                  <span>BHX_AGI_LXU - Tổ 17 Chợ Láng</span>
-                </div>
-                <div class="text-[11px] text-slate-500 flex items-center gap-2 mt-0.5">
-                  <span class="font-mono font-medium text-slate-600">Mã: 5806</span>
-                  <span>·</span>
-                  <span class="text-bhx-green-dark font-medium">3 Tỷ -&gt; &lt;5 Tỷ</span>
-                </div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-bold text-bhx-green-dark whitespace-nowrap">
-                1.465.200.000 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-slate-600 whitespace-nowrap">
-                1.650.000.000 đ
-              </td>
-              <td class="py-3 px-4 text-center">
-                <div class="flex items-center justify-between text-xs mb-1">
-                  <span class="font-bold font-mono text-slate-800">88.80%</span>
-                  <span class="text-[10px] text-slate-500">Mục tiêu: 100%</span>
-                </div>
-                <div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
-                  <div class="bg-amber-500 h-2 rounded-full transition-all duration-500" style="width: 88.8%"></div>
-                </div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-semibold text-rose-600 whitespace-nowrap">
-                184.800.000 đ
-              </td>
-            </tr>
-          
-            <tr class="hover:bg-slate-50/80 transition ">
-              <td class="py-3 px-3 text-center whitespace-nowrap"><span class="inline-flex items-center justify-center w-6 h-6 text-slate-500 font-semibold text-xs">8</span></td>
-              <td class="py-3 px-4">
-                <div class="font-bold text-slate-900 flex items-center gap-1.5">
-                  <span>BHX_AGI_LXU - Bình Đức</span>
-                </div>
-                <div class="text-[11px] text-slate-500 flex items-center gap-2 mt-0.5">
-                  <span class="font-mono font-medium text-slate-600">Mã: 15033</span>
-                  <span>·</span>
-                  <span class="text-bhx-green-dark font-medium">1.2 Tỷ -&gt; &lt;2 Tỷ</span>
-                </div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-bold text-bhx-green-dark whitespace-nowrap">
-                1.185.400.000 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-slate-600 whitespace-nowrap">
-                1.300.000.000 đ
-              </td>
-              <td class="py-3 px-4 text-center">
-                <div class="flex items-center justify-between text-xs mb-1">
-                  <span class="font-bold font-mono text-bhx-green">91.18%</span>
-                  <span class="text-[10px] text-slate-500">Mục tiêu: 100%</span>
-                </div>
-                <div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
-                  <div class="bg-bhx-green h-2 rounded-full transition-all duration-500" style="width: 91.18%"></div>
-                </div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-semibold text-rose-600 whitespace-nowrap">
-                114.600.000 đ
-              </td>
-            </tr>
-          
-            <tr class="hover:bg-slate-50/80 transition ">
-              <td class="py-3 px-3 text-center whitespace-nowrap"><span class="inline-flex items-center justify-center w-6 h-6 text-slate-500 font-semibold text-xs">9</span></td>
-              <td class="py-3 px-4">
-                <div class="font-bold text-slate-900 flex items-center gap-1.5">
-                  <span>BHX_AGI_CPH - Thạnh Mỹ Tây</span>
-                </div>
-                <div class="text-[11px] text-slate-500 flex items-center gap-2 mt-0.5">
-                  <span class="font-mono font-medium text-slate-600">Mã: 10070</span>
-                  <span>·</span>
-                  <span class="text-bhx-green-dark font-medium">1.2 Tỷ -&gt; &lt;2 Tỷ</span>
-                </div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-bold text-bhx-green-dark whitespace-nowrap">
-                1.142.600.000 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-slate-600 whitespace-nowrap">
-                1.280.000.000 đ
-              </td>
-              <td class="py-3 px-4 text-center">
-                <div class="flex items-center justify-between text-xs mb-1">
-                  <span class="font-bold font-mono text-slate-800">89.27%</span>
-                  <span class="text-[10px] text-slate-500">Mục tiêu: 100%</span>
-                </div>
-                <div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
-                  <div class="bg-amber-500 h-2 rounded-full transition-all duration-500" style="width: 89.27%"></div>
-                </div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-semibold text-rose-600 whitespace-nowrap">
-                137.400.000 đ
-              </td>
-            </tr>
-          
-            <tr class="hover:bg-slate-50/80 transition ">
-              <td class="py-3 px-3 text-center whitespace-nowrap"><span class="inline-flex items-center justify-center w-6 h-6 text-slate-500 font-semibold text-xs">10</span></td>
-              <td class="py-3 px-4">
-                <div class="font-bold text-slate-900 flex items-center gap-1.5">
-                  <span>BHX_AGI_CTO - Thửa 117 Vĩnh Bình</span>
-                </div>
-                <div class="text-[11px] text-slate-500 flex items-center gap-2 mt-0.5">
-                  <span class="font-mono font-medium text-slate-600">Mã: 5118</span>
-                  <span>·</span>
-                  <span class="text-bhx-green-dark font-medium">1.2 Tỷ -&gt; &lt;2 Tỷ</span>
-                </div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-bold text-bhx-green-dark whitespace-nowrap">
-                1.098.700.000 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-slate-600 whitespace-nowrap">
-                1.250.000.000 đ
-              </td>
-              <td class="py-3 px-4 text-center">
-                <div class="flex items-center justify-between text-xs mb-1">
-                  <span class="font-bold font-mono text-slate-800">87.90%</span>
-                  <span class="text-[10px] text-slate-500">Mục tiêu: 100%</span>
-                </div>
-                <div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
-                  <div class="bg-amber-500 h-2 rounded-full transition-all duration-500" style="width: 87.9%"></div>
-                </div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-semibold text-rose-600 whitespace-nowrap">
-                151.300.000 đ
-              </td>
-            </tr>
-          
-            <tr class="hover:bg-slate-50/80 transition ">
-              <td class="py-3 px-3 text-center whitespace-nowrap"><span class="inline-flex items-center justify-center w-6 h-6 text-slate-500 font-semibold text-xs">11</span></td>
-              <td class="py-3 px-4">
-                <div class="font-bold text-slate-900 flex items-center gap-1.5">
-                  <span>BHX_AGI_TBI - An Hảo</span>
-                </div>
-                <div class="text-[11px] text-slate-500 flex items-center gap-2 mt-0.5">
-                  <span class="font-mono font-medium text-slate-600">Mã: 8873</span>
-                  <span>·</span>
-                  <span class="text-bhx-green-dark font-medium">1.2 Tỷ -&gt; &lt;2 Tỷ</span>
-                </div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-bold text-bhx-green-dark whitespace-nowrap">
-                1.054.200.000 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-slate-600 whitespace-nowrap">
-                1.200.000.000 đ
-              </td>
-              <td class="py-3 px-4 text-center">
-                <div class="flex items-center justify-between text-xs mb-1">
-                  <span class="font-bold font-mono text-slate-800">87.85%</span>
-                  <span class="text-[10px] text-slate-500">Mục tiêu: 100%</span>
-                </div>
-                <div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
-                  <div class="bg-amber-500 h-2 rounded-full transition-all duration-500" style="width: 87.85%"></div>
-                </div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-semibold text-rose-600 whitespace-nowrap">
-                145.800.000 đ
-              </td>
-            </tr>
-          
-            <tr class="hover:bg-slate-50/80 transition ">
-              <td class="py-3 px-3 text-center whitespace-nowrap"><span class="inline-flex items-center justify-center w-6 h-6 text-slate-500 font-semibold text-xs">12</span></td>
-              <td class="py-3 px-4">
-                <div class="font-bold text-slate-900 flex items-center gap-1.5">
-                  <span>BHX_AGI_YTT - Chợ Kênh 7</span>
-                </div>
-                <div class="text-[11px] text-slate-500 flex items-center gap-2 mt-0.5">
-                  <span class="font-mono font-medium text-slate-600">Mã: 29756</span>
-                  <span>·</span>
-                  <span class="text-bhx-green-dark font-medium">1.2 Tỷ -&gt; &lt;2 Tỷ</span>
-                </div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-bold text-bhx-green-dark whitespace-nowrap">
-                1.025.800.000 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-slate-600 whitespace-nowrap">
-                1.150.000.000 đ
-              </td>
-              <td class="py-3 px-4 text-center">
-                <div class="flex items-center justify-between text-xs mb-1">
-                  <span class="font-bold font-mono text-slate-800">89.20%</span>
-                  <span class="text-[10px] text-slate-500">Mục tiêu: 100%</span>
-                </div>
-                <div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
-                  <div class="bg-amber-500 h-2 rounded-full transition-all duration-500" style="width: 89.2%"></div>
-                </div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-semibold text-rose-600 whitespace-nowrap">
-                124.200.000 đ
-              </td>
-            </tr>
-          
-            <tr class="hover:bg-slate-50/80 transition ">
-              <td class="py-3 px-3 text-center whitespace-nowrap"><span class="inline-flex items-center justify-center w-6 h-6 text-slate-500 font-semibold text-xs">13</span></td>
-              <td class="py-3 px-4">
-                <div class="font-bold text-slate-900 flex items-center gap-1.5">
-                  <span>BHX_AGI_TTO - Lương An Trà (Giồng Cát)</span>
-                </div>
-                <div class="text-[11px] text-slate-500 flex items-center gap-2 mt-0.5">
-                  <span class="font-mono font-medium text-slate-600">Mã: 9376</span>
-                  <span>·</span>
-                  <span class="text-bhx-green-dark font-medium">1.2 Tỷ -&gt; &lt;2 Tỷ</span>
-                </div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-bold text-bhx-green-dark whitespace-nowrap">
-                994.500.000 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-slate-600 whitespace-nowrap">
-                1.150.000.000 đ
-              </td>
-              <td class="py-3 px-4 text-center">
-                <div class="flex items-center justify-between text-xs mb-1">
-                  <span class="font-bold font-mono text-slate-800">86.48%</span>
-                  <span class="text-[10px] text-slate-500">Mục tiêu: 100%</span>
-                </div>
-                <div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
-                  <div class="bg-amber-500 h-2 rounded-full transition-all duration-500" style="width: 86.48%"></div>
-                </div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-semibold text-rose-600 whitespace-nowrap">
-                155.500.000 đ
-              </td>
-            </tr>
-          
-            <tr class="hover:bg-slate-50/80 transition ">
-              <td class="py-3 px-3 text-center whitespace-nowrap"><span class="inline-flex items-center justify-center w-6 h-6 text-slate-500 font-semibold text-xs">14</span></td>
-              <td class="py-3 px-4">
-                <div class="font-bold text-slate-900 flex items-center gap-1.5">
-                  <span>BHX_AGI_LXU - Thửa 1615 Vĩnh Thuận (Chợ Vĩnh Tre)</span>
-                </div>
-                <div class="text-[11px] text-slate-500 flex items-center gap-2 mt-0.5">
-                  <span class="font-mono font-medium text-slate-600">Mã: 4684</span>
-                  <span>·</span>
-                  <span class="text-bhx-green-dark font-medium">1.2 Tỷ -&gt; &lt;2 Tỷ</span>
-                </div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-bold text-bhx-green-dark whitespace-nowrap">
-                978.300.000 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-slate-600 whitespace-nowrap">
-                1.120.000.000 đ
-              </td>
-              <td class="py-3 px-4 text-center">
-                <div class="flex items-center justify-between text-xs mb-1">
-                  <span class="font-bold font-mono text-slate-800">87.35%</span>
-                  <span class="text-[10px] text-slate-500">Mục tiêu: 100%</span>
-                </div>
-                <div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
-                  <div class="bg-amber-500 h-2 rounded-full transition-all duration-500" style="width: 87.35%"></div>
-                </div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-semibold text-rose-600 whitespace-nowrap">
-                141.700.000 đ
-              </td>
-            </tr>
-          
-            <tr class="hover:bg-slate-50/80 transition ">
-              <td class="py-3 px-3 text-center whitespace-nowrap"><span class="inline-flex items-center justify-center w-6 h-6 text-slate-500 font-semibold text-xs">15</span></td>
-              <td class="py-3 px-4">
-                <div class="font-bold text-slate-900 flex items-center gap-1.5">
-                  <span>BHX_AGI_CTO - Chợ Tà Đảnh</span>
-                </div>
-                <div class="text-[11px] text-slate-500 flex items-center gap-2 mt-0.5">
-                  <span class="font-mono font-medium text-slate-600">Mã: 35562</span>
-                  <span>·</span>
-                  <span class="text-bhx-green-dark font-medium">1.2 Tỷ -&gt; &lt;2 Tỷ</span>
-                </div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-bold text-bhx-green-dark whitespace-nowrap">
-                946.800.000 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-slate-600 whitespace-nowrap">
-                1.100.000.000 đ
-              </td>
-              <td class="py-3 px-4 text-center">
-                <div class="flex items-center justify-between text-xs mb-1">
-                  <span class="font-bold font-mono text-slate-800">86.07%</span>
-                  <span class="text-[10px] text-slate-500">Mục tiêu: 100%</span>
-                </div>
-                <div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
-                  <div class="bg-amber-500 h-2 rounded-full transition-all duration-500" style="width: 86.07%"></div>
-                </div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-semibold text-rose-600 whitespace-nowrap">
-                153.200.000 đ
-              </td>
-            </tr>
-          
-            <tr class="hover:bg-slate-50/80 transition ">
-              <td class="py-3 px-3 text-center whitespace-nowrap"><span class="inline-flex items-center justify-center w-6 h-6 text-slate-500 font-semibold text-xs">16</span></td>
-              <td class="py-3 px-4">
-                <div class="font-bold text-slate-900 flex items-center gap-1.5">
-                  <span>BHX_AGI_ACU - Vĩnh Hậu</span>
-                </div>
-                <div class="text-[11px] text-slate-500 flex items-center gap-2 mt-0.5">
-                  <span class="font-mono font-medium text-slate-600">Mã: 30453</span>
-                  <span>·</span>
-                  <span class="text-bhx-green-dark font-medium">1.2 Tỷ -&gt; &lt;2 Tỷ</span>
-                </div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-bold text-bhx-green-dark whitespace-nowrap">
-                923.400.000 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-slate-600 whitespace-nowrap">
-                1.080.000.000 đ
-              </td>
-              <td class="py-3 px-4 text-center">
-                <div class="flex items-center justify-between text-xs mb-1">
-                  <span class="font-bold font-mono text-slate-800">85.50%</span>
-                  <span class="text-[10px] text-slate-500">Mục tiêu: 100%</span>
-                </div>
-                <div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
-                  <div class="bg-amber-500 h-2 rounded-full transition-all duration-500" style="width: 85.5%"></div>
-                </div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-semibold text-rose-600 whitespace-nowrap">
-                156.600.000 đ
-              </td>
-            </tr>
-          
-            <tr class="hover:bg-slate-50/80 transition ">
-              <td class="py-3 px-3 text-center whitespace-nowrap"><span class="inline-flex items-center justify-center w-6 h-6 text-slate-500 font-semibold text-xs">17</span></td>
-              <td class="py-3 px-4">
-                <div class="font-bold text-slate-900 flex items-center gap-1.5">
-                  <span>BHX_AGI_VGI - Vĩnh Gia</span>
-                </div>
-                <div class="text-[11px] text-slate-500 flex items-center gap-2 mt-0.5">
-                  <span class="font-mono font-medium text-slate-600">Mã: 27944</span>
-                  <span>·</span>
-                  <span class="text-bhx-green-dark font-medium">1.2 Tỷ -&gt; &lt;2 Tỷ</span>
-                </div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-bold text-bhx-green-dark whitespace-nowrap">
-                896.200.000 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-slate-600 whitespace-nowrap">
-                1.050.000.000 đ
-              </td>
-              <td class="py-3 px-4 text-center">
-                <div class="flex items-center justify-between text-xs mb-1">
-                  <span class="font-bold font-mono text-slate-800">85.35%</span>
-                  <span class="text-[10px] text-slate-500">Mục tiêu: 100%</span>
-                </div>
-                <div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
-                  <div class="bg-amber-500 h-2 rounded-full transition-all duration-500" style="width: 85.35%"></div>
-                </div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-semibold text-rose-600 whitespace-nowrap">
-                153.800.000 đ
-              </td>
-            </tr>
-          
-            <tr class="hover:bg-slate-50/80 transition ">
-              <td class="py-3 px-3 text-center whitespace-nowrap"><span class="inline-flex items-center justify-center w-6 h-6 text-slate-500 font-semibold text-xs">18</span></td>
-              <td class="py-3 px-4">
-                <div class="font-bold text-slate-900 flex items-center gap-1.5">
-                  <span>BHX_AGI_CTO - Chợ Cỏ Đỏ</span>
-                </div>
-                <div class="text-[11px] text-slate-500 flex items-center gap-2 mt-0.5">
-                  <span class="font-mono font-medium text-slate-600">Mã: 35547</span>
-                  <span>·</span>
-                  <span class="text-bhx-green-dark font-medium">1.2 Tỷ -&gt; &lt;2 Tỷ</span>
-                </div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-bold text-bhx-green-dark whitespace-nowrap">
-                881.100.000 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-slate-600 whitespace-nowrap">
-                1.020.000.000 đ
-              </td>
-              <td class="py-3 px-4 text-center">
-                <div class="flex items-center justify-between text-xs mb-1">
-                  <span class="font-bold font-mono text-slate-800">86.38%</span>
-                  <span class="text-[10px] text-slate-500">Mục tiêu: 100%</span>
-                </div>
-                <div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
-                  <div class="bg-amber-500 h-2 rounded-full transition-all duration-500" style="width: 86.38%"></div>
-                </div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-semibold text-rose-600 whitespace-nowrap">
-                138.900.000 đ
-              </td>
-            </tr>
-          
-            <tr class="hover:bg-slate-50/80 transition ">
-              <td class="py-3 px-3 text-center whitespace-nowrap"><span class="inline-flex items-center justify-center w-6 h-6 text-slate-500 font-semibold text-xs">19</span></td>
-              <td class="py-3 px-4">
-                <div class="font-bold text-slate-900 flex items-center gap-1.5">
-                  <span>BHX_AGI_LXU - Mỹ Hòa Hưng</span>
-                </div>
-                <div class="text-[11px] text-slate-500 flex items-center gap-2 mt-0.5">
-                  <span class="font-mono font-medium text-slate-600">Mã: 9307</span>
-                  <span>·</span>
-                  <span class="text-bhx-green-dark font-medium">1.2 Tỷ -&gt; &lt;2 Tỷ</span>
-                </div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-bold text-bhx-green-dark whitespace-nowrap">
-                812.500.000 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-slate-600 whitespace-nowrap">
-                980.000.000 đ
-              </td>
-              <td class="py-3 px-4 text-center">
-                <div class="flex items-center justify-between text-xs mb-1">
-                  <span class="font-bold font-mono text-slate-800">82.91%</span>
-                  <span class="text-[10px] text-slate-500">Mục tiêu: 100%</span>
-                </div>
-                <div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
-                  <div class="bg-orange-500 h-2 rounded-full transition-all duration-500" style="width: 82.91%"></div>
-                </div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-semibold text-rose-600 whitespace-nowrap">
-                167.500.000 đ
-              </td>
-            </tr>
-          
-            <tr class="hover:bg-slate-50/80 transition ">
-              <td class="py-3 px-3 text-center whitespace-nowrap"><span class="inline-flex items-center justify-center w-6 h-6 text-slate-500 font-semibold text-xs">20</span></td>
-              <td class="py-3 px-4">
-                <div class="font-bold text-slate-900 flex items-center gap-1.5">
-                  <span>BHX_AGI_VNH - Vĩnh Nhuận</span>
-                </div>
-                <div class="text-[11px] text-slate-500 flex items-center gap-2 mt-0.5">
-                  <span class="font-mono font-medium text-slate-600">Mã: 29509</span>
-                  <span>·</span>
-                  <span class="text-bhx-green-dark font-medium">1.2 Tỷ -&gt; &lt;2 Tỷ</span>
-                </div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-bold text-bhx-green-dark whitespace-nowrap">
-                798.400.000 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-slate-600 whitespace-nowrap">
-                980.000.000 đ
-              </td>
-              <td class="py-3 px-4 text-center">
-                <div class="flex items-center justify-between text-xs mb-1">
-                  <span class="font-bold font-mono text-slate-800">81.47%</span>
-                  <span class="text-[10px] text-slate-500">Mục tiêu: 100%</span>
-                </div>
-                <div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
-                  <div class="bg-orange-500 h-2 rounded-full transition-all duration-500" style="width: 81.47%"></div>
-                </div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-semibold text-rose-600 whitespace-nowrap">
-                181.600.000 đ
-              </td>
-            </tr>
-          
-            <tr class="hover:bg-slate-50/80 transition ">
-              <td class="py-3 px-3 text-center whitespace-nowrap"><span class="inline-flex items-center justify-center w-6 h-6 text-slate-500 font-semibold text-xs">21</span></td>
-              <td class="py-3 px-4">
-                <div class="font-bold text-slate-900 flex items-center gap-1.5">
-                  <span>BHX_AGI_VGI - Vĩnh Điều</span>
-                </div>
-                <div class="text-[11px] text-slate-500 flex items-center gap-2 mt-0.5">
-                  <span class="font-mono font-medium text-slate-600">Mã: 27544</span>
-                  <span>·</span>
-                  <span class="text-bhx-green-dark font-medium">1.2 Tỷ -&gt; &lt;2 Tỷ</span>
-                </div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-bold text-bhx-green-dark whitespace-nowrap">
-                772.100.000 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-slate-600 whitespace-nowrap">
-                950.000.000 đ
-              </td>
-              <td class="py-3 px-4 text-center">
-                <div class="flex items-center justify-between text-xs mb-1">
-                  <span class="font-bold font-mono text-slate-800">81.27%</span>
-                  <span class="text-[10px] text-slate-500">Mục tiêu: 100%</span>
-                </div>
-                <div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
-                  <div class="bg-orange-500 h-2 rounded-full transition-all duration-500" style="width: 81.27%"></div>
-                </div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-semibold text-rose-600 whitespace-nowrap">
-                177.900.000 đ
-              </td>
-            </tr>
-          </tbody>
-            <!-- Table Footer Total -->
+            <tbody id="table-luyke-body" class="divide-y divide-slate-100 text-slate-700"></tbody>
             <tfoot class="bg-emerald-50/80 font-bold border-t-2 border-bhx-green text-xs sm:text-sm">
-              <tr id="table-luyke-foot">
-        <td class="py-3.5 px-3 text-center">TỔNG</td>
-        <td class="py-3.5 px-4">Tổng cộng (21 Siêu thị)</td>
-        <td class="py-3.5 px-4 text-right font-mono text-bhx-green-dark">26.858.420.000 đ</td>
-        <td class="py-3.5 px-4 text-right font-mono text-slate-700">30.460.000.000 đ</td>
-        <td class="py-3.5 px-4 text-center font-mono text-bhx-green">88.18%</td>
-        <td class="py-3.5 px-4 text-right font-mono text-rose-600">3.601.580.000 đ</td>
-      </tr>
+              <tr id="table-luyke-foot"></tr>
             </tfoot>
           </table>
         </div>
       </section>
 
-      <!-- BẢNG 2: BÁO CÁO RETIME DOANH THU HÔM NAY -->
+      <!-- BẢNG 2: RETIME DOANH THU HÔM NAY -->
       <section class="bg-white rounded-xl shadow-sm border border-emerald-900/10 overflow-hidden">
         <div class="bg-gradient-to-r from-amber-700 to-amber-600 px-4 sm:px-6 py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b-2 border-bhx-yellow">
           <div>
@@ -955,7 +295,7 @@
               <span class="px-2 py-0.5 rounded text-[10px] font-extrabold uppercase bg-bhx-yellow text-amber-900">BẢNG 2</span>
               <h3 class="text-sm sm:text-base font-bold text-white tracking-tight">Báo Cáo Retime Doanh Thu Hôm Nay</h3>
             </div>
-            <p class="text-xs text-amber-100 mt-0.5">Doanh số thời gian thực ngày 25/03/2026 (chi tiết Offline &amp; Online)</p>
+            <p class="text-xs text-amber-100 mt-0.5">Doanh số thời gian thực (chi tiết Offline & Online)</p>
           </div>
           <div class="flex items-center gap-2 text-xs text-amber-100">
             <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
@@ -968,452 +308,167 @@
             <thead class="bg-slate-50 text-slate-600 uppercase text-[11px] font-bold tracking-wider border-b border-slate-200">
               <tr>
                 <th scope="col" class="py-3 px-3 text-center w-14">Xếp hạng</th>
-                <th scope="col" class="py-3 px-4">Tên Siêu Thị &amp; Mã ĐN</th>
+                <th scope="col" class="py-3 px-4">Tên Siêu Thị & Mã ĐN</th>
                 <th scope="col" class="py-3 px-4 text-right">DT Offline (VNĐ)</th>
                 <th scope="col" class="py-3 px-4 text-right">DT Online (VNĐ)</th>
                 <th scope="col" class="py-3 px-4 text-right text-bhx-green-dark font-extrabold">Tổng Doanh Thu VNĐ</th>
                 <th scope="col" class="py-3 px-3 text-center">Số Hóa Đơn</th>
               </tr>
             </thead>
-            <tbody id="table-retime-body" class="divide-y divide-slate-100 text-slate-700">
-            <tr class="hover:bg-slate-50/80 transition bg-amber-50/30">
-              <td class="py-3 px-3 text-center whitespace-nowrap"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-amber-400 text-amber-950 font-extrabold text-xs shadow-xs">1</span></td>
-              <td class="py-3 px-4">
-                <div class="font-bold text-slate-900">BHX_AGI_TTO - Thửa 309 Tri Tôn</div>
-                <div class="text-[11px] text-slate-500 font-mono mt-0.5">Mã: 6119 · 5 Tỷ -&gt; &lt;8 Tỷ</div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-slate-700 whitespace-nowrap">
-                98.405.000 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-emerald-700 whitespace-nowrap">
-                24.935.127 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-extrabold text-amber-800 whitespace-nowrap text-sm sm:text-base">
-                123.340.127 đ
-              </td>
-              <td class="py-3 px-3 text-center font-mono font-bold text-slate-700">
-                698
-              </td>
-            </tr>
-          
-            <tr class="hover:bg-slate-50/80 transition bg-amber-50/30">
-              <td class="py-3 px-3 text-center whitespace-nowrap"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-slate-300 text-slate-800 font-extrabold text-xs shadow-xs">2</span></td>
-              <td class="py-3 px-4">
-                <div class="font-bold text-slate-900">BHX_AGI_TTO - Thửa 74 Tỉnh Biên</div>
-                <div class="text-[11px] text-slate-500 font-mono mt-0.5">Mã: 5028 · 3 Tỷ -&gt; &lt;5 Tỷ</div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-slate-700 whitespace-nowrap">
-                50.695.000 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-emerald-700 whitespace-nowrap">
-                18.277.681 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-extrabold text-amber-800 whitespace-nowrap text-sm sm:text-base">
-                68.972.681 đ
-              </td>
-              <td class="py-3 px-3 text-center font-mono font-bold text-slate-700">
-                452
-              </td>
-            </tr>
-          
-            <tr class="hover:bg-slate-50/80 transition bg-amber-50/30">
-              <td class="py-3 px-3 text-center whitespace-nowrap"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-amber-600 text-white font-extrabold text-xs shadow-xs">3</span></td>
-              <td class="py-3 px-4">
-                <div class="font-bold text-slate-900">BHX_AGI_LXU - Thửa 1615 Mỹ Quý</div>
-                <div class="text-[11px] text-slate-500 font-mono mt-0.5">Mã: 4687 · 3 Tỷ -&gt; &lt;5 Tỷ</div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-slate-700 whitespace-nowrap">
-                55.736.000 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-emerald-700 whitespace-nowrap">
-                8.765.112 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-extrabold text-amber-800 whitespace-nowrap text-sm sm:text-base">
-                64.501.112 đ
-              </td>
-              <td class="py-3 px-3 text-center font-mono font-bold text-slate-700">
-                521
-              </td>
-            </tr>
-          
-            <tr class="hover:bg-slate-50/80 transition ">
-              <td class="py-3 px-3 text-center whitespace-nowrap"><span class="inline-flex items-center justify-center w-6 h-6 text-slate-500 font-semibold text-xs">4</span></td>
-              <td class="py-3 px-4">
-                <div class="font-bold text-slate-900">BHX_AGI_TRI - Chợ Mới Nhà Bàng</div>
-                <div class="text-[11px] text-slate-500 font-mono mt-0.5">Mã: 6220 · 5 Tỷ -&gt; &lt;8 Tỷ</div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-slate-700 whitespace-nowrap">
-                52.894.000 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-emerald-700 whitespace-nowrap">
-                9.708.261 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-extrabold text-amber-800 whitespace-nowrap text-sm sm:text-base">
-                62.602.261 đ
-              </td>
-              <td class="py-3 px-3 text-center font-mono font-bold text-slate-700">
-                504
-              </td>
-            </tr>
-          
-            <tr class="hover:bg-slate-50/80 transition ">
-              <td class="py-3 px-3 text-center whitespace-nowrap"><span class="inline-flex items-center justify-center w-6 h-6 text-slate-500 font-semibold text-xs">5</span></td>
-              <td class="py-3 px-4">
-                <div class="font-bold text-slate-900">BHX_AGI_LXU - Thửa 3409 Mỹ Quý</div>
-                <div class="text-[11px] text-slate-500 font-mono mt-0.5">Mã: 30256 · 3 Tỷ -&gt; &lt;5 Tỷ</div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-slate-700 whitespace-nowrap">
-                48.210.000 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-emerald-700 whitespace-nowrap">
-                8.450.200 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-extrabold text-amber-800 whitespace-nowrap text-sm sm:text-base">
-                56.660.200 đ
-              </td>
-              <td class="py-3 px-3 text-center font-mono font-bold text-slate-700">
-                410
-              </td>
-            </tr>
-          
-            <tr class="hover:bg-slate-50/80 transition ">
-              <td class="py-3 px-3 text-center whitespace-nowrap"><span class="inline-flex items-center justify-center w-6 h-6 text-slate-500 font-semibold text-xs">6</span></td>
-              <td class="py-3 px-4">
-                <div class="font-bold text-slate-900">BHX_AGI_LXU - Tổ 17 Chợ Láng</div>
-                <div class="text-[11px] text-slate-500 font-mono mt-0.5">Mã: 5806 · 3 Tỷ -&gt; &lt;5 Tỷ</div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-slate-700 whitespace-nowrap">
-                46.937.000 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-emerald-700 whitespace-nowrap">
-                5.821.400 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-extrabold text-amber-800 whitespace-nowrap text-sm sm:text-base">
-                52.758.400 đ
-              </td>
-              <td class="py-3 px-3 text-center font-mono font-bold text-slate-700">
-                412
-              </td>
-            </tr>
-          
-            <tr class="hover:bg-slate-50/80 transition ">
-              <td class="py-3 px-3 text-center whitespace-nowrap"><span class="inline-flex items-center justify-center w-6 h-6 text-slate-500 font-semibold text-xs">7</span></td>
-              <td class="py-3 px-4">
-                <div class="font-bold text-slate-900">BHX_AGI_TTO - Ngã tư Lư Trì (Ba Chúc)</div>
-                <div class="text-[11px] text-slate-500 font-mono mt-0.5">Mã: 7140 · 3 Tỷ -&gt; &lt;5 Tỷ</div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-slate-700 whitespace-nowrap">
-                45.739.000 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-emerald-700 whitespace-nowrap">
-                5.689.135 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-extrabold text-amber-800 whitespace-nowrap text-sm sm:text-base">
-                51.428.135 đ
-              </td>
-              <td class="py-3 px-3 text-center font-mono font-bold text-slate-700">
-                403
-              </td>
-            </tr>
-          
-            <tr class="hover:bg-slate-50/80 transition ">
-              <td class="py-3 px-3 text-center whitespace-nowrap"><span class="inline-flex items-center justify-center w-6 h-6 text-slate-500 font-semibold text-xs">8</span></td>
-              <td class="py-3 px-4">
-                <div class="font-bold text-slate-900">BHX_AGI_LXU - Bình Đức</div>
-                <div class="text-[11px] text-slate-500 font-mono mt-0.5">Mã: 15033 · 1.2 Tỷ -&gt; &lt;2 Tỷ</div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-slate-700 whitespace-nowrap">
-                35.136.000 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-emerald-700 whitespace-nowrap">
-                10.130.800 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-extrabold text-amber-800 whitespace-nowrap text-sm sm:text-base">
-                45.266.800 đ
-              </td>
-              <td class="py-3 px-3 text-center font-mono font-bold text-slate-700">
-                347
-              </td>
-            </tr>
-          
-            <tr class="hover:bg-slate-50/80 transition ">
-              <td class="py-3 px-3 text-center whitespace-nowrap"><span class="inline-flex items-center justify-center w-6 h-6 text-slate-500 font-semibold text-xs">9</span></td>
-              <td class="py-3 px-4">
-                <div class="font-bold text-slate-900">BHX_AGI_CPH - Thạnh Mỹ Tây</div>
-                <div class="text-[11px] text-slate-500 font-mono mt-0.5">Mã: 10070 · 1.2 Tỷ -&gt; &lt;2 Tỷ</div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-slate-700 whitespace-nowrap">
-                38.787.000 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-emerald-700 whitespace-nowrap">
-                5.565.723 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-extrabold text-amber-800 whitespace-nowrap text-sm sm:text-base">
-                44.352.723 đ
-              </td>
-              <td class="py-3 px-3 text-center font-mono font-bold text-slate-700">
-                334
-              </td>
-            </tr>
-          
-            <tr class="hover:bg-slate-50/80 transition ">
-              <td class="py-3 px-3 text-center whitespace-nowrap"><span class="inline-flex items-center justify-center w-6 h-6 text-slate-500 font-semibold text-xs">10</span></td>
-              <td class="py-3 px-4">
-                <div class="font-bold text-slate-900">BHX_AGI_YTT - Chợ Kênh 7</div>
-                <div class="text-[11px] text-slate-500 font-mono mt-0.5">Mã: 29756 · 1.2 Tỷ -&gt; &lt;2 Tỷ</div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-slate-700 whitespace-nowrap">
-                33.836.000 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-emerald-700 whitespace-nowrap">
-                7.587.009 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-extrabold text-amber-800 whitespace-nowrap text-sm sm:text-base">
-                41.423.009 đ
-              </td>
-              <td class="py-3 px-3 text-center font-mono font-bold text-slate-700">
-                323
-              </td>
-            </tr>
-          
-            <tr class="hover:bg-slate-50/80 transition ">
-              <td class="py-3 px-3 text-center whitespace-nowrap"><span class="inline-flex items-center justify-center w-6 h-6 text-slate-500 font-semibold text-xs">11</span></td>
-              <td class="py-3 px-4">
-                <div class="font-bold text-slate-900">BHX_AGI_TTO - Lương An Trà (Giồng Cát)</div>
-                <div class="text-[11px] text-slate-500 font-mono mt-0.5">Mã: 9376 · 1.2 Tỷ -&gt; &lt;2 Tỷ</div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-slate-700 whitespace-nowrap">
-                32.800.000 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-emerald-700 whitespace-nowrap">
-                7.645.396 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-extrabold text-amber-800 whitespace-nowrap text-sm sm:text-base">
-                40.445.396 đ
-              </td>
-              <td class="py-3 px-3 text-center font-mono font-bold text-slate-700">
-                292
-              </td>
-            </tr>
-          
-            <tr class="hover:bg-slate-50/80 transition ">
-              <td class="py-3 px-3 text-center whitespace-nowrap"><span class="inline-flex items-center justify-center w-6 h-6 text-slate-500 font-semibold text-xs">12</span></td>
-              <td class="py-3 px-4">
-                <div class="font-bold text-slate-900">BHX_AGI_CTO - Thửa 117 Vĩnh Bình</div>
-                <div class="text-[11px] text-slate-500 font-mono mt-0.5">Mã: 5118 · 1.2 Tỷ -&gt; &lt;2 Tỷ</div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-slate-700 whitespace-nowrap">
-                36.957.000 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-emerald-700 whitespace-nowrap">
-                2.429.127 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-extrabold text-amber-800 whitespace-nowrap text-sm sm:text-base">
-                39.386.127 đ
-              </td>
-              <td class="py-3 px-3 text-center font-mono font-bold text-slate-700">
-                303
-              </td>
-            </tr>
-          
-            <tr class="hover:bg-slate-50/80 transition ">
-              <td class="py-3 px-3 text-center whitespace-nowrap"><span class="inline-flex items-center justify-center w-6 h-6 text-slate-500 font-semibold text-xs">13</span></td>
-              <td class="py-3 px-4">
-                <div class="font-bold text-slate-900">BHX_AGI_CTO - Chợ Tà Đảnh</div>
-                <div class="text-[11px] text-slate-500 font-mono mt-0.5">Mã: 35562 · 1.2 Tỷ -&gt; &lt;2 Tỷ</div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-slate-700 whitespace-nowrap">
-                31.525.000 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-emerald-700 whitespace-nowrap">
-                5.666.800 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-extrabold text-amber-800 whitespace-nowrap text-sm sm:text-base">
-                37.191.800 đ
-              </td>
-              <td class="py-3 px-3 text-center font-mono font-bold text-slate-700">
-                265
-              </td>
-            </tr>
-          
-            <tr class="hover:bg-slate-50/80 transition ">
-              <td class="py-3 px-3 text-center whitespace-nowrap"><span class="inline-flex items-center justify-center w-6 h-6 text-slate-500 font-semibold text-xs">14</span></td>
-              <td class="py-3 px-4">
-                <div class="font-bold text-slate-900">BHX_AGI_TBI - An Hảo</div>
-                <div class="text-[11px] text-slate-500 font-mono mt-0.5">Mã: 8873 · 1.2 Tỷ -&gt; &lt;2 Tỷ</div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-slate-700 whitespace-nowrap">
-                33.175.000 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-emerald-700 whitespace-nowrap">
-                2.724.300 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-extrabold text-amber-800 whitespace-nowrap text-sm sm:text-base">
-                35.899.300 đ
-              </td>
-              <td class="py-3 px-3 text-center font-mono font-bold text-slate-700">
-                288
-              </td>
-            </tr>
-          
-            <tr class="hover:bg-slate-50/80 transition ">
-              <td class="py-3 px-3 text-center whitespace-nowrap"><span class="inline-flex items-center justify-center w-6 h-6 text-slate-500 font-semibold text-xs">15</span></td>
-              <td class="py-3 px-4">
-                <div class="font-bold text-slate-900">BHX_AGI_LXU - Thửa 1615 Vĩnh Thuận (Chợ Vĩnh Tre)</div>
-                <div class="text-[11px] text-slate-500 font-mono mt-0.5">Mã: 4684 · 1.2 Tỷ -&gt; &lt;2 Tỷ</div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-slate-700 whitespace-nowrap">
-                31.685.000 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-emerald-700 whitespace-nowrap">
-                3.744.920 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-extrabold text-amber-800 whitespace-nowrap text-sm sm:text-base">
-                35.429.920 đ
-              </td>
-              <td class="py-3 px-3 text-center font-mono font-bold text-slate-700">
-                271
-              </td>
-            </tr>
-          
-            <tr class="hover:bg-slate-50/80 transition ">
-              <td class="py-3 px-3 text-center whitespace-nowrap"><span class="inline-flex items-center justify-center w-6 h-6 text-slate-500 font-semibold text-xs">16</span></td>
-              <td class="py-3 px-4">
-                <div class="font-bold text-slate-900">BHX_AGI_ACU - Vĩnh Hậu</div>
-                <div class="text-[11px] text-slate-500 font-mono mt-0.5">Mã: 30453 · 1.2 Tỷ -&gt; &lt;2 Tỷ</div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-slate-700 whitespace-nowrap">
-                29.842.000 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-emerald-700 whitespace-nowrap">
-                4.817.100 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-extrabold text-amber-800 whitespace-nowrap text-sm sm:text-base">
-                34.659.100 đ
-              </td>
-              <td class="py-3 px-3 text-center font-mono font-bold text-slate-700">
-                277
-              </td>
-            </tr>
-          
-            <tr class="hover:bg-slate-50/80 transition ">
-              <td class="py-3 px-3 text-center whitespace-nowrap"><span class="inline-flex items-center justify-center w-6 h-6 text-slate-500 font-semibold text-xs">17</span></td>
-              <td class="py-3 px-4">
-                <div class="font-bold text-slate-900">BHX_AGI_CTO - Chợ Cỏ Đỏ</div>
-                <div class="text-[11px] text-slate-500 font-mono mt-0.5">Mã: 35547 · 1.2 Tỷ -&gt; &lt;2 Tỷ</div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-slate-700 whitespace-nowrap">
-                27.896.000 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-emerald-700 whitespace-nowrap">
-                4.792.000 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-extrabold text-amber-800 whitespace-nowrap text-sm sm:text-base">
-                32.688.000 đ
-              </td>
-              <td class="py-3 px-3 text-center font-mono font-bold text-slate-700">
-                254
-              </td>
-            </tr>
-          
-            <tr class="hover:bg-slate-50/80 transition ">
-              <td class="py-3 px-3 text-center whitespace-nowrap"><span class="inline-flex items-center justify-center w-6 h-6 text-slate-500 font-semibold text-xs">18</span></td>
-              <td class="py-3 px-4">
-                <div class="font-bold text-slate-900">BHX_AGI_VNH - Vĩnh Nhuận</div>
-                <div class="text-[11px] text-slate-500 font-mono mt-0.5">Mã: 29509 · 1.2 Tỷ -&gt; &lt;2 Tỷ</div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-slate-700 whitespace-nowrap">
-                23.896.000 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-emerald-700 whitespace-nowrap">
-                7.645.396 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-extrabold text-amber-800 whitespace-nowrap text-sm sm:text-base">
-                31.541.396 đ
-              </td>
-              <td class="py-3 px-3 text-center font-mono font-bold text-slate-700">
-                232
-              </td>
-            </tr>
-          
-            <tr class="hover:bg-slate-50/80 transition ">
-              <td class="py-3 px-3 text-center whitespace-nowrap"><span class="inline-flex items-center justify-center w-6 h-6 text-slate-500 font-semibold text-xs">19</span></td>
-              <td class="py-3 px-4">
-                <div class="font-bold text-slate-900">BHX_AGI_VGI - Vĩnh Điều</div>
-                <div class="text-[11px] text-slate-500 font-mono mt-0.5">Mã: 27544 · 1.2 Tỷ -&gt; &lt;2 Tỷ</div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-slate-700 whitespace-nowrap">
-                23.800.000 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-emerald-700 whitespace-nowrap">
-                6.838.623 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-extrabold text-amber-800 whitespace-nowrap text-sm sm:text-base">
-                30.638.623 đ
-              </td>
-              <td class="py-3 px-3 text-center font-mono font-bold text-slate-700">
-                228
-              </td>
-            </tr>
-          
-            <tr class="hover:bg-slate-50/80 transition ">
-              <td class="py-3 px-3 text-center whitespace-nowrap"><span class="inline-flex items-center justify-center w-6 h-6 text-slate-500 font-semibold text-xs">20</span></td>
-              <td class="py-3 px-4">
-                <div class="font-bold text-slate-900">BHX_AGI_VGI - Vĩnh Gia</div>
-                <div class="text-[11px] text-slate-500 font-mono mt-0.5">Mã: 27944 · 1.2 Tỷ -&gt; &lt;2 Tỷ</div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-slate-700 whitespace-nowrap">
-                28.472.000 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-emerald-700 whitespace-nowrap">
-                1.374.107 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-extrabold text-amber-800 whitespace-nowrap text-sm sm:text-base">
-                29.846.107 đ
-              </td>
-              <td class="py-3 px-3 text-center font-mono font-bold text-slate-700">
-                263
-              </td>
-            </tr>
-          
-            <tr class="hover:bg-slate-50/80 transition ">
-              <td class="py-3 px-3 text-center whitespace-nowrap"><span class="inline-flex items-center justify-center w-6 h-6 text-slate-500 font-semibold text-xs">21</span></td>
-              <td class="py-3 px-4">
-                <div class="font-bold text-slate-900">BHX_AGI_LXU - Mỹ Hòa Hưng</div>
-                <div class="text-[11px] text-slate-500 font-mono mt-0.5">Mã: 9307 · 1.2 Tỷ -&gt; &lt;2 Tỷ</div>
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-slate-700 whitespace-nowrap">
-                23.941.000 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-emerald-700 whitespace-nowrap">
-                1.703.818 đ
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-extrabold text-amber-800 whitespace-nowrap text-sm sm:text-base">
-                25.644.818 đ
-              </td>
-              <td class="py-3 px-3 text-center font-mono font-bold text-slate-700">
-                209
-              </td>
-            </tr>
-          </tbody>
-            <!-- Table Footer Total -->
+            <tbody id="table-retime-body" class="divide-y divide-slate-100 text-slate-700"></tbody>
             <tfoot class="bg-amber-50/80 font-bold border-t-2 border-amber-600 text-xs sm:text-sm">
-              <tr id="table-retime-foot">
-        <td class="py-3.5 px-3 text-center">TỔNG</td>
-        <td class="py-3.5 px-4">Tổng Retime Hôm Nay (21 Siêu thị)</td>
-        <td class="py-3.5 px-4 text-right font-mono text-slate-800">830.364.000 đ</td>
-        <td class="py-3.5 px-4 text-right font-mono text-emerald-800">154.312.035 đ</td>
-        <td class="py-3.5 px-4 text-right font-mono text-amber-900 text-sm sm:text-base">984.676.035 đ</td>
-        <td class="py-3.5 px-3 text-center font-mono text-slate-900">7.286</td>
-      </tr>
+              <tr id="table-retime-foot"></tr>
             </tfoot>
           </table>
         </div>
       </section>
 
     </div>
-
   </main>
+
+  <!-- MODAL CẬP NHẬT DATA MỚI -->
+  <div id="import-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-3 sm:p-6 bg-black/60 backdrop-blur-xs">
+    <div class="relative w-full max-w-4xl bg-white rounded-2xl shadow-2xl flex flex-col max-h-[92vh] overflow-hidden border border-slate-200">
+      
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between px-5 py-4 border-b border-slate-200 bg-gradient-to-r from-bhx-green-dark to-bhx-green text-white">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-bhx-yellow text-bhx-green-dark font-black flex items-center justify-center shadow-xs">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+          </div>
+          <div>
+            <h3 class="text-base sm:text-lg font-bold text-white flex items-center gap-2">
+              Cập Nhật Số Liệu Siêu Thị Mới
+              <span class="text-[11px] font-semibold bg-bhx-yellow text-bhx-green-dark px-2 py-0.5 rounded-full">
+                Auto Sync
+              </span>
+            </h3>
+            <p class="text-xs text-emerald-100">
+              Nhập dữ liệu nhanh qua Dán Excel, Tải file .xlsx hoặc Đồng bộ Google Sheets.
+            </p>
+          </div>
+        </div>
+        <button onclick="closeImportModal()" class="p-1.5 rounded-lg text-white/80 hover:text-white hover:bg-white/10 transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+
+      <!-- Tab Switcher -->
+      <div class="flex items-center gap-2 px-5 py-2.5 bg-slate-50 border-b border-slate-200 text-xs font-bold">
+        <button onclick="switchImportTab('paste')" id="modal-tab-paste" class="px-3 py-1.5 rounded-lg bg-bhx-green text-white shadow-xs">
+          1. Dán từ Excel / Google Sheet
+        </button>
+        <button onclick="switchImportTab('file')" id="modal-tab-file" class="px-3 py-1.5 rounded-lg text-slate-600 hover:bg-slate-200">
+          2. Tải File Excel (.xlsx / .csv)
+        </button>
+        <button onclick="switchImportTab('gsheet')" id="modal-tab-gsheet" class="px-3 py-1.5 rounded-lg text-slate-600 hover:bg-slate-200">
+          3. Kết nối Link Google Sheet
+        </button>
+      </div>
+
+      <!-- Date Input & Reset -->
+      <div class="px-5 py-2 bg-emerald-50/60 border-b border-emerald-100 flex items-center justify-between text-xs text-slate-700">
+        <div class="flex items-center gap-2">
+          <span class="font-semibold text-bhx-green-dark">Ngày báo cáo:</span>
+          <input type="text" id="modal-date-input" value="26/03/2026" class="px-2 py-1 bg-white border border-emerald-300 rounded text-xs font-mono font-bold text-slate-800 w-32 focus:outline-none focus:ring-1 focus:ring-bhx-green">
+        </div>
+        <button onclick="resetToOriginalData()" class="text-xs text-slate-500 hover:text-rose-600 font-medium">
+          Khôi phục dữ liệu gốc mẫu
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="flex-1 overflow-y-auto p-5 space-y-4 text-xs">
+        
+        <!-- Tab 1: Paste -->
+        <div id="import-content-paste" class="space-y-3">
+          <div class="p-3 bg-amber-50 rounded-xl border border-amber-200 text-amber-900">
+            <p class="font-bold mb-1">📋 Cách dán nhanh từ Excel:</p>
+            <p class="text-[11px] text-amber-800">
+              Bôi đen các dòng trong bảng Excel của bạn, nhấn <b>Ctrl + C</b> và dán (<b>Ctrl + V</b>) vào ô dưới:
+            </p>
+          </div>
+          <textarea id="modal-paste-area" rows="7" placeholder="Dán các dòng copy từ Excel vào đây..." class="w-full p-3 font-mono text-xs bg-slate-50 border border-slate-300 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-bhx-green custom-scrollbar"></textarea>
+          <div class="flex justify-end">
+            <button onclick="parsePastedText()" class="px-4 py-2 bg-bhx-green text-white font-bold rounded-lg hover:bg-bhx-green-dark transition">
+              Kiểm tra & Xem thử dữ liệu
+            </button>
+          </div>
+        </div>
+
+        <!-- Tab 2: File Upload -->
+        <div id="import-content-file" class="hidden space-y-4">
+          <div class="border-2 border-dashed border-slate-300 rounded-2xl p-8 text-center hover:border-bhx-green bg-slate-50/50 flex flex-col items-center justify-center">
+            <h4 class="font-bold text-sm text-slate-800 mb-1">Chọn file Excel (.xlsx, .xls, .csv)</h4>
+            <p class="text-xs text-slate-500 mb-4">Tải lên file báo cáo xuất từ hệ thống siêu thị Bách Hóa Xanh</p>
+            <label class="cursor-pointer px-4 py-2 bg-bhx-green text-white rounded-lg font-bold text-xs hover:bg-bhx-green-dark transition">
+              <span>Chọn file từ thiết bị</span>
+              <input type="file" accept=".xlsx,.xls,.csv" onchange="handleExcelFileUpload(event)" class="hidden">
+            </label>
+          </div>
+        </div>
+
+        <!-- Tab 3: Google Sheet -->
+        <div id="import-content-gsheet" class="hidden space-y-3">
+          <div class="p-3 bg-emerald-50 rounded-xl border border-emerald-200 text-emerald-950">
+            <p class="font-bold mb-1">🔗 Đồng bộ Google Sheet tự động:</p>
+            <p class="text-[11px] text-emerald-800">
+              Dán đường link chia sẻ của file Google Sheets (đảm bảo quyền "Bất kỳ ai có liên kết đều có thể xem").
+            </p>
+          </div>
+          <div class="flex gap-2">
+            <input type="text" id="modal-gsheet-input" placeholder="https://docs.google.com/spreadsheets/d/.../edit?usp=sharing" class="flex-1 p-2.5 bg-slate-50 border border-slate-300 rounded-xl font-mono text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-bhx-green">
+            <button onclick="fetchGoogleSheetData()" class="px-4 py-2 bg-bhx-green text-white font-bold rounded-xl hover:bg-bhx-green-dark transition flex-shrink-0">
+              Đồng Bộ Ngay
+            </button>
+          </div>
+        </div>
+
+        <!-- Status Alert -->
+        <div id="modal-alert" class="hidden p-3 rounded-xl text-xs"></div>
+
+        <!-- Preview Table -->
+        <div id="modal-preview-section" class="hidden space-y-2 pt-2 border-t border-slate-200">
+          <div class="flex items-center justify-between font-bold text-slate-800">
+            <span id="modal-preview-title">Bản xem trước dữ liệu mới</span>
+            <span class="text-bhx-green" id="modal-preview-total"></span>
+          </div>
+          <div class="max-h-56 overflow-y-auto border border-slate-200 rounded-xl custom-scrollbar">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-slate-100 text-slate-700 font-bold sticky top-0">
+                <tr>
+                  <th class="p-2 text-center w-8">#</th>
+                  <th class="p-2">Tên Siêu Thị</th>
+                  <th class="p-2 text-right">Lũy Kế (VNĐ)</th>
+                  <th class="p-2 text-right">Base (VNĐ)</th>
+                  <th class="p-2 text-center">% Đạt</th>
+                  <th class="p-2 text-right">Hôm Nay</th>
+                </tr>
+              </thead>
+              <tbody id="modal-preview-body" class="divide-y divide-slate-100"></tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Footer Buttons -->
+      <div class="px-5 py-3.5 bg-slate-50 border-t border-slate-200 flex items-center justify-between">
+        <div class="text-xs text-slate-500">
+          Số liệu mới sẽ lưu tự động vào trình duyệt (F5 không mất).
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="closeImportModal()" class="px-4 py-2 bg-white border border-slate-300 rounded-lg font-semibold text-slate-700 hover:bg-slate-100">
+            Hủy
+          </button>
+          <button id="modal-apply-btn" onclick="applyParsedData()" disabled class="px-5 py-2 bg-bhx-green text-white font-bold rounded-lg hover:bg-bhx-green-dark transition shadow-md disabled:opacity-40 disabled:cursor-not-allowed">
+            Áp Dụng Dữ Liệu Này
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
 
   <!-- FOOTER -->
   <footer class="mt-8 bg-white border-t border-slate-200 py-5 text-center text-xs text-slate-500">
@@ -1425,357 +480,58 @@
         <span>An Giang Supermarket Cluster</span>
       </div>
       <div>
-        File đơn hoàn chỉnh chạy trực tiếp trên mọi trình duyệt web hoặc hosting miễn phí.
+        © 2026 Bách Hóa Xanh · File HTML đơn độc lập chạy trên mọi hosting miễn phí.
       </div>
     </div>
   </footer>
 
-  <!-- SCRIPT: APPLICATION LOGIC & CHART.JS -->
+  <!-- SCRIPT LOGIC & CHART -->
   <script>
-    // 21 SIÊU THỊ BÁCH HÓA XANH KHU VỰC AN GIANG
-    const supermarkets = [
-      {
-        rankLuyKe: 1,
-        rankRetime: 1,
-        code: "6119",
-        name: "BHX_AGI_TTO - Thửa 309 Tri Tôn",
-        shortName: "Thửa 309 Tri Tôn",
-        tier: "5 Tỷ -> <8 Tỷ",
-        thucHien: 2785620000,
-        base: 3100000000,
-        percentComplete: 89.86,
-        conLai: 314380000,
-        dtOfflineToday: 98405000,
-        dtOnlineToday: 24935127,
-        tongDtToday: 123340127,
-        totalBillsToday: 698
-      },
-      {
-        rankLuyKe: 2,
-        rankRetime: 4,
-        code: "6220",
-        name: "BHX_AGI_TRI - Chợ Mới Nhà Bàng",
-        shortName: "Chợ Mới Nhà Bàng",
-        tier: "5 Tỷ -> <8 Tỷ",
-        thucHien: 2420150000,
-        base: 2800000000,
-        percentComplete: 86.43,
-        conLai: 379850000,
-        dtOfflineToday: 52894000,
-        dtOnlineToday: 9708261,
-        tongDtToday: 62602261,
-        totalBillsToday: 504
-      },
-      {
-        rankLuyKe: 3,
-        rankRetime: 3,
-        code: "4687",
-        name: "BHX_AGI_LXU - Thửa 1615 Mỹ Quý",
-        shortName: "Thửa 1615 Mỹ Quý",
-        tier: "3 Tỷ -> <5 Tỷ",
-        thucHien: 1845900000,
-        base: 1950000000,
-        percentComplete: 94.66,
-        conLai: 104100000,
-        dtOfflineToday: 55736000,
-        dtOnlineToday: 8765112,
-        tongDtToday: 64501112,
-        totalBillsToday: 521
-      },
-      {
-        rankLuyKe: 4,
-        rankRetime: 2,
-        code: "5028",
-        name: "BHX_AGI_TTO - Thửa 74 Tỉnh Biên",
-        shortName: "Thửa 74 Tỉnh Biên",
-        tier: "3 Tỷ -> <5 Tỷ",
-        thucHien: 1732450000,
-        base: 1900000000,
-        percentComplete: 91.18,
-        conLai: 167550000,
-        dtOfflineToday: 50695000,
-        dtOnlineToday: 18277681,
-        tongDtToday: 68972681,
-        totalBillsToday: 452
-      },
-      {
-        rankLuyKe: 5,
-        rankRetime: 6,
-        code: "7140",
-        name: "BHX_AGI_TTO - Ngã tư Lư Trì (Ba Chúc)",
-        shortName: "Ngã tư Lư Trì (Ba Chúc)",
-        tier: "3 Tỷ -> <5 Tỷ",
-        thucHien: 1586300000,
-        base: 1750000000,
-        percentComplete: 90.65,
-        conLai: 163700000,
-        dtOfflineToday: 45739000,
-        dtOnlineToday: 5689135,
-        tongDtToday: 51428135,
-        totalBillsToday: 403
-      },
-      {
-        rankLuyKe: 6,
-        rankRetime: 5,
-        code: "30256",
-        name: "BHX_AGI_LXU - Thửa 3409 Mỹ Quý",
-        shortName: "Thửa 3409 Mỹ Quý",
-        tier: "3 Tỷ -> <5 Tỷ",
-        thucHien: 1512800000,
-        base: 1700000000,
-        percentComplete: 88.99,
-        conLai: 187200000,
-        dtOfflineToday: 48210000,
-        dtOnlineToday: 8450200,
-        tongDtToday: 56660200,
-        totalBillsToday: 410
-      },
-      {
-        rankLuyKe: 7,
-        rankRetime: 7,
-        code: "5806",
-        name: "BHX_AGI_LXU - Tổ 17 Chợ Láng",
-        shortName: "Tổ 17 Chợ Láng",
-        tier: "3 Tỷ -> <5 Tỷ",
-        thucHien: 1465200000,
-        base: 1650000000,
-        percentComplete: 88.80,
-        conLai: 184800000,
-        dtOfflineToday: 46937000,
-        dtOnlineToday: 5821400,
-        tongDtToday: 52758400,
-        totalBillsToday: 412
-      },
-      {
-        rankLuyKe: 8,
-        rankRetime: 8,
-        code: "15033",
-        name: "BHX_AGI_LXU - Bình Đức",
-        shortName: "Bình Đức",
-        tier: "1.2 Tỷ -> <2 Tỷ",
-        thucHien: 1185400000,
-        base: 1300000000,
-        percentComplete: 91.18,
-        conLai: 114600000,
-        dtOfflineToday: 35136000,
-        dtOnlineToday: 10130800,
-        tongDtToday: 45266800,
-        totalBillsToday: 347
-      },
-      {
-        rankLuyKe: 9,
-        rankRetime: 9,
-        code: "10070",
-        name: "BHX_AGI_CPH - Thạnh Mỹ Tây",
-        shortName: "Thạnh Mỹ Tây",
-        tier: "1.2 Tỷ -> <2 Tỷ",
-        thucHien: 1142600000,
-        base: 1280000000,
-        percentComplete: 89.27,
-        conLai: 137400000,
-        dtOfflineToday: 38787000,
-        dtOnlineToday: 5565723,
-        tongDtToday: 44352723,
-        totalBillsToday: 334
-      },
-      {
-        rankLuyKe: 10,
-        rankRetime: 12,
-        code: "5118",
-        name: "BHX_AGI_CTO - Thửa 117 Vĩnh Bình",
-        shortName: "Thửa 117 Vĩnh Bình",
-        tier: "1.2 Tỷ -> <2 Tỷ",
-        thucHien: 1098700000,
-        base: 1250000000,
-        percentComplete: 87.90,
-        conLai: 151300000,
-        dtOfflineToday: 36957000,
-        dtOnlineToday: 2429127,
-        tongDtToday: 39386127,
-        totalBillsToday: 303
-      },
-      {
-        rankLuyKe: 11,
-        rankRetime: 14,
-        code: "8873",
-        name: "BHX_AGI_TBI - An Hảo",
-        shortName: "An Hảo",
-        tier: "1.2 Tỷ -> <2 Tỷ",
-        thucHien: 1054200000,
-        base: 1200000000,
-        percentComplete: 87.85,
-        conLai: 145800000,
-        dtOfflineToday: 33175000,
-        dtOnlineToday: 2724300,
-        tongDtToday: 35899300,
-        totalBillsToday: 288
-      },
-      {
-        rankLuyKe: 12,
-        rankRetime: 10,
-        code: "29756",
-        name: "BHX_AGI_YTT - Chợ Kênh 7",
-        shortName: "Chợ Kênh 7",
-        tier: "1.2 Tỷ -> <2 Tỷ",
-        thucHien: 1025800000,
-        base: 1150000000,
-        percentComplete: 89.20,
-        conLai: 124200000,
-        dtOfflineToday: 33836000,
-        dtOnlineToday: 7587009,
-        tongDtToday: 41423009,
-        totalBillsToday: 323
-      },
-      {
-        rankLuyKe: 13,
-        rankRetime: 11,
-        code: "9376",
-        name: "BHX_AGI_TTO - Lương An Trà (Giồng Cát)",
-        shortName: "Lương An Trà (Giồng Cát)",
-        tier: "1.2 Tỷ -> <2 Tỷ",
-        thucHien: 994500000,
-        base: 1150000000,
-        percentComplete: 86.48,
-        conLai: 155500000,
-        dtOfflineToday: 32800000,
-        dtOnlineToday: 7645396,
-        tongDtToday: 40445396,
-        totalBillsToday: 292
-      },
-      {
-        rankLuyKe: 14,
-        rankRetime: 15,
-        code: "4684",
-        name: "BHX_AGI_LXU - Thửa 1615 Vĩnh Thuận (Chợ Vĩnh Tre)",
-        shortName: "Chợ Vĩnh Tre",
-        tier: "1.2 Tỷ -> <2 Tỷ",
-        thucHien: 978300000,
-        base: 1120000000,
-        percentComplete: 87.35,
-        conLai: 141700000,
-        dtOfflineToday: 31685000,
-        dtOnlineToday: 3744920,
-        tongDtToday: 35429920,
-        totalBillsToday: 271
-      },
-      {
-        rankLuyKe: 15,
-        rankRetime: 13,
-        code: "35562",
-        name: "BHX_AGI_CTO - Chợ Tà Đảnh",
-        shortName: "Chợ Tà Đảnh",
-        tier: "1.2 Tỷ -> <2 Tỷ",
-        thucHien: 946800000,
-        base: 1100000000,
-        percentComplete: 86.07,
-        conLai: 153200000,
-        dtOfflineToday: 31525000,
-        dtOnlineToday: 5666800,
-        tongDtToday: 37191800,
-        totalBillsToday: 265
-      },
-      {
-        rankLuyKe: 16,
-        rankRetime: 16,
-        code: "30453",
-        name: "BHX_AGI_ACU - Vĩnh Hậu",
-        shortName: "Vĩnh Hậu",
-        tier: "1.2 Tỷ -> <2 Tỷ",
-        thucHien: 923400000,
-        base: 1080000000,
-        percentComplete: 85.50,
-        conLai: 156600000,
-        dtOfflineToday: 29842000,
-        dtOnlineToday: 4817100,
-        tongDtToday: 34659100,
-        totalBillsToday: 277
-      },
-      {
-        rankLuyKe: 17,
-        rankRetime: 19,
-        code: "27944",
-        name: "BHX_AGI_VGI - Vĩnh Gia",
-        shortName: "Vĩnh Gia",
-        tier: "1.2 Tỷ -> <2 Tỷ",
-        thucHien: 896200000,
-        base: 1050000000,
-        percentComplete: 85.35,
-        conLai: 153800000,
-        dtOfflineToday: 28472000,
-        dtOnlineToday: 1374107,
-        tongDtToday: 29846107,
-        totalBillsToday: 263
-      },
-      {
-        rankLuyKe: 18,
-        rankRetime: 17,
-        code: "35547",
-        name: "BHX_AGI_CTO - Chợ Cỏ Đỏ",
-        shortName: "Chợ Cỏ Đỏ",
-        tier: "1.2 Tỷ -> <2 Tỷ",
-        thucHien: 881100000,
-        base: 1020000000,
-        percentComplete: 86.38,
-        conLai: 138900000,
-        dtOfflineToday: 27896000,
-        dtOnlineToday: 4792000,
-        tongDtToday: 32688000,
-        totalBillsToday: 254
-      },
-      {
-        rankLuyKe: 19,
-        rankRetime: 21,
-        code: "9307",
-        name: "BHX_AGI_LXU - Mỹ Hòa Hưng",
-        shortName: "Mỹ Hòa Hưng",
-        tier: "1.2 Tỷ -> <2 Tỷ",
-        thucHien: 812500000,
-        base: 980000000,
-        percentComplete: 82.91,
-        conLai: 167500000,
-        dtOfflineToday: 23941000,
-        dtOnlineToday: 1703818,
-        tongDtToday: 25644818,
-        totalBillsToday: 209
-      },
-      {
-        rankLuyKe: 20,
-        rankRetime: 18,
-        code: "29509",
-        name: "BHX_AGI_VNH - Vĩnh Nhuận",
-        shortName: "Vĩnh Nhuận",
-        tier: "1.2 Tỷ -> <2 Tỷ",
-        thucHien: 798400000,
-        base: 980000000,
-        percentComplete: 81.47,
-        conLai: 181600000,
-        dtOfflineToday: 23896000,
-        dtOnlineToday: 7645396,
-        tongDtToday: 31541396,
-        totalBillsToday: 232
-      },
-      {
-        rankLuyKe: 21,
-        rankRetime: 20,
-        code: "27544",
-        name: "BHX_AGI_VGI - Vĩnh Điều",
-        shortName: "Vĩnh Điều",
-        tier: "1.2 Tỷ -> <2 Tỷ",
-        thucHien: 772100000,
-        base: 950000000,
-        percentComplete: 81.27,
-        conLai: 177900000,
-        dtOfflineToday: 23800000,
-        dtOnlineToday: 6838623,
-        tongDtToday: 30638623,
-        totalBillsToday: 228
-      }
+    // Dữ liệu mặc định 21 siêu thị
+    const DEFAULT_SUPERMARKETS = [
+      { rankLuyKe: 1, rankRetime: 1, code: "6119", name: "BHX_AGI_TTO - Thửa 309 Tri Tôn", shortName: "Thửa 309 Tri Tôn", tier: "5 Tỷ -> <8 Tỷ", thucHien: 2785620000, base: 3100000000, percentComplete: 89.86, conLai: 314380000, dtOfflineToday: 98405000, dtOnlineToday: 24935127, tongDtToday: 123340127, totalBillsToday: 698 },
+      { rankLuyKe: 2, rankRetime: 4, code: "6220", name: "BHX_AGI_TRI - Chợ Mới Nhà Bàng", shortName: "Chợ Mới Nhà Bàng", tier: "5 Tỷ -> <8 Tỷ", thucHien: 2420150000, base: 2800000000, percentComplete: 86.43, conLai: 379850000, dtOfflineToday: 52894000, dtOnlineToday: 9708261, tongDtToday: 62602261, totalBillsToday: 504 },
+      { rankLuyKe: 3, rankRetime: 3, code: "4687", name: "BHX_AGI_LXU - Thửa 1615 Mỹ Quý", shortName: "Thửa 1615 Mỹ Quý", tier: "3 Tỷ -> <5 Tỷ", thucHien: 1845900000, base: 1950000000, percentComplete: 94.66, conLai: 104100000, dtOfflineToday: 55736000, dtOnlineToday: 8765112, tongDtToday: 64501112, totalBillsToday: 521 },
+      { rankLuyKe: 4, rankRetime: 2, code: "5028", name: "BHX_AGI_TTO - Thửa 74 Tỉnh Biên", shortName: "Thửa 74 Tỉnh Biên", tier: "3 Tỷ -> <5 Tỷ", thucHien: 1732450000, base: 1900000000, percentComplete: 91.18, conLai: 167550000, dtOfflineToday: 50695000, dtOnlineToday: 18277681, tongDtToday: 68972681, totalBillsToday: 452 },
+      { rankLuyKe: 5, rankRetime: 6, code: "7140", name: "BHX_AGI_TTO - Ngã tư Lư Trì (Ba Chúc)", shortName: "Ngã tư Lư Trì (Ba Chúc)", tier: "3 Tỷ -> <5 Tỷ", thucHien: 1586300000, base: 1750000000, percentComplete: 90.65, conLai: 163700000, dtOfflineToday: 45739000, dtOnlineToday: 5689135, tongDtToday: 51428135, totalBillsToday: 403 },
+      { rankLuyKe: 6, rankRetime: 5, code: "30256", name: "BHX_AGI_LXU - Thửa 3409 Mỹ Quý", shortName: "Thửa 3409 Mỹ Quý", tier: "3 Tỷ -> <5 Tỷ", thucHien: 1512800000, base: 1700000000, percentComplete: 88.99, conLai: 187200000, dtOfflineToday: 48210000, dtOnlineToday: 8450200, tongDtToday: 56660200, totalBillsToday: 410 },
+      { rankLuyKe: 7, rankRetime: 7, code: "5806", name: "BHX_AGI_LXU - Tổ 17 Chợ Láng", shortName: "Tổ 17 Chợ Láng", tier: "3 Tỷ -> <5 Tỷ", thucHien: 1465200000, base: 1650000000, percentComplete: 88.80, conLai: 184800000, dtOfflineToday: 46937000, dtOnlineToday: 5821400, tongDtToday: 52758400, totalBillsToday: 412 },
+      { rankLuyKe: 8, rankRetime: 8, code: "15033", name: "BHX_AGI_LXU - Bình Đức", shortName: "Bình Đức", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 1185400000, base: 1300000000, percentComplete: 91.18, conLai: 114600000, dtOfflineToday: 35136000, dtOnlineToday: 10130800, tongDtToday: 45266800, totalBillsToday: 347 },
+      { rankLuyKe: 9, rankRetime: 9, code: "10070", name: "BHX_AGI_CPH - Thạnh Mỹ Tây", shortName: "Thạnh Mỹ Tây", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 1142600000, base: 1280000000, percentComplete: 89.27, conLai: 137400000, dtOfflineToday: 38787000, dtOnlineToday: 5565723, tongDtToday: 44352723, totalBillsToday: 334 },
+      { rankLuyKe: 10, rankRetime: 12, code: "5118", name: "BHX_AGI_CTO - Thửa 117 Vĩnh Bình", shortName: "Thửa 117 Vĩnh Bình", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 1098700000, base: 1250000000, percentComplete: 87.90, conLai: 151300000, dtOfflineToday: 36957000, dtOnlineToday: 2429127, tongDtToday: 39386127, totalBillsToday: 303 },
+      { rankLuyKe: 11, rankRetime: 14, code: "8873", name: "BHX_AGI_TBI - An Hảo", shortName: "An Hảo", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 1054200000, base: 1200000000, percentComplete: 87.85, conLai: 145800000, dtOfflineToday: 33175000, dtOnlineToday: 2724300, tongDtToday: 35899300, totalBillsToday: 288 },
+      { rankLuyKe: 12, rankRetime: 10, code: "29756", name: "BHX_AGI_YTT - Chợ Kênh 7", shortName: "Chợ Kênh 7", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 1025800000, base: 1150000000, percentComplete: 89.20, conLai: 124200000, dtOfflineToday: 33836000, dtOnlineToday: 7587009, tongDtToday: 41423009, totalBillsToday: 323 },
+      { rankLuyKe: 13, rankRetime: 11, code: "9376", name: "BHX_AGI_TTO - Lương An Trà (Giồng Cát)", shortName: "Lương An Trà (Giồng Cát)", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 994500000, base: 1150000000, percentComplete: 86.48, conLai: 155500000, dtOfflineToday: 32800000, dtOnlineToday: 7645396, tongDtToday: 40445396, totalBillsToday: 292 },
+      { rankLuyKe: 14, rankRetime: 15, code: "4684", name: "BHX_AGI_LXU - Thửa 1615 Vĩnh Thuận (Chợ Vĩnh Tre)", shortName: "Chợ Vĩnh Tre", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 978300000, base: 1120000000, percentComplete: 87.35, conLai: 141700000, dtOfflineToday: 31685000, dtOnlineToday: 3744920, tongDtToday: 35429920, totalBillsToday: 271 },
+      { rankLuyKe: 15, rankRetime: 13, code: "35562", name: "BHX_AGI_CTO - Chợ Tà Đảnh", shortName: "Chợ Tà Đảnh", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 946800000, base: 1100000000, percentComplete: 86.07, conLai: 153200000, dtOfflineToday: 31525000, dtOnlineToday: 5666800, tongDtToday: 37191800, totalBillsToday: 265 },
+      { rankLuyKe: 16, rankRetime: 16, code: "30453", name: "BHX_AGI_ACU - Vĩnh Hậu", shortName: "Vĩnh Hậu", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 923400000, base: 1080000000, percentComplete: 85.50, conLai: 156600000, dtOfflineToday: 29842000, dtOnlineToday: 4817100, tongDtToday: 34659100, totalBillsToday: 277 },
+      { rankLuyKe: 17, rankRetime: 19, code: "27944", name: "BHX_AGI_VGI - Vĩnh Gia", shortName: "Vĩnh Gia", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 896200000, base: 1050000000, percentComplete: 85.35, conLai: 153800000, dtOfflineToday: 28472000, dtOnlineToday: 1374107, tongDtToday: 29846107, totalBillsToday: 263 },
+      { rankLuyKe: 18, rankRetime: 17, code: "35547", name: "BHX_AGI_CTO - Chợ Cỏ Đỏ", shortName: "Chợ Cỏ Đỏ", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 881100000, base: 1020000000, percentComplete: 86.38, conLai: 138900000, dtOfflineToday: 27896000, dtOnlineToday: 4792000, tongDtToday: 32688000, totalBillsToday: 254 },
+      { rankLuyKe: 19, rankRetime: 21, code: "9307", name: "BHX_AGI_LXU - Mỹ Hòa Hưng", shortName: "Mỹ Hòa Hưng", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 812500000, base: 980000000, percentComplete: 82.91, conLai: 167500000, dtOfflineToday: 23941000, dtOnlineToday: 1703818, tongDtToday: 25644818, totalBillsToday: 209 },
+      { rankLuyKe: 20, rankRetime: 18, code: "29509", name: "BHX_AGI_VNH - Vĩnh Nhuận", shortName: "Vĩnh Nhuận", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 798400000, base: 980000000, percentComplete: 81.47, conLai: 181600000, dtOfflineToday: 23896000, dtOnlineToday: 7645396, tongDtToday: 31541396, totalBillsToday: 232 },
+      { rankLuyKe: 21, rankRetime: 20, code: "27544", name: "BHX_AGI_VGI - Vĩnh Điều", shortName: "Vĩnh Điều", tier: "1.2 Tỷ -> <2 Tỷ", thucHien: 772100000, base: 950000000, percentComplete: 81.27, conLai: 177900000, dtOfflineToday: 23800000, dtOnlineToday: 6838623, tongDtToday: 30638623, totalBillsToday: 228 }
     ];
 
+    // Load from localStorage or default
+    let supermarkets = [];
+    try {
+      const saved = localStorage.getItem('bhx_supermarket_data');
+      if (saved) {
+        supermarkets = JSON.parse(saved);
+        document.getElementById('custom-data-badge').classList.remove('hidden');
+      } else {
+        supermarkets = [...DEFAULT_SUPERMARKETS];
+      }
+    } catch {
+      supermarkets = [...DEFAULT_SUPERMARKETS];
+    }
+
+    let reportDateStr = localStorage.getItem('bhx_report_date') || "25/03/2026";
     let currentTier = 'all';
     let searchQuery = '';
     let chartInstance = null;
-    let chartMode = 'luyke'; // 'luyke' or 'today'
+    let chartMode = 'luyke';
+    let tempParsedRows = null;
 
     function formatVND(num) {
       return new Intl.NumberFormat('vi-VN').format(Math.round(num)) + ' đ';
@@ -1803,12 +559,37 @@
       });
     }
 
+    function updateSummaryCards() {
+      const totalThucHien = supermarkets.reduce((a, b) => a + b.thucHien, 0);
+      const totalBase = supermarkets.reduce((a, b) => a + b.base, 0);
+      const totalConLai = supermarkets.reduce((a, b) => a + b.conLai, 0);
+      const totalToday = supermarkets.reduce((a, b) => a + b.tongDtToday, 0);
+      const totalOffline = supermarkets.reduce((a, b) => a + b.dtOfflineToday, 0);
+      const totalOnline = supermarkets.reduce((a, b) => a + b.dtOnlineToday, 0);
+      const totalBills = supermarkets.reduce((a, b) => a + b.totalBillsToday, 0);
+      const avgPct = totalBase > 0 ? (totalThucHien / totalBase * 100) : 0;
+
+      document.getElementById('stat-total-luyke').textContent = formatVND(totalThucHien);
+      document.getElementById('stat-total-base').textContent = formatVND(totalBase);
+      document.getElementById('stat-avg-percent').textContent = avgPct.toFixed(2) + '%';
+      document.getElementById('stat-total-today').textContent = formatVND(totalToday);
+      document.getElementById('stat-offline-today').textContent = (totalOffline / 1000000).toFixed(1) + ' Tr';
+      document.getElementById('stat-online-today').textContent = (totalOnline / 1000000).toFixed(1) + ' Tr';
+      document.getElementById('stat-store-count').innerHTML = `${supermarkets.length} / ${supermarkets.length} <span class="text-sm font-normal text-slate-500">Điểm bán</span>`;
+      document.getElementById('stat-total-bills').innerHTML = `${totalBills.toLocaleString('vi-VN')} <span class="text-sm font-normal text-slate-500">Hóa đơn</span>`;
+      document.getElementById('stat-total-conlai').textContent = formatVND(totalConLai);
+
+      document.getElementById('header-store-count').textContent = `Khu vực Tỉnh An Giang (${supermarkets.length} Siêu thị)`;
+      document.getElementById('banner-report-date').textContent = `Ngày ${reportDateStr}`;
+      document.getElementById('card-date-indicator').textContent = `Cập nhật ngày ${reportDateStr}`;
+      document.getElementById('banner-progress').textContent = avgPct.toFixed(2) + '%';
+      document.getElementById('banner-active-stores').textContent = `${supermarkets.length}/${supermarkets.length} Điểm bán kết nối POS`;
+      document.getElementById('filter-all-btn').textContent = `Tất cả (${supermarkets.length})`;
+    }
+
     function renderTables() {
       const filtered = getFilteredData();
-
-      // Sort for Lũy kế
       const sortedLuyKe = [...filtered].sort((a, b) => b.thucHien - a.thucHien);
-      // Sort for Retime
       const sortedRetime = [...filtered].sort((a, b) => b.tongDtToday - a.tongDtToday);
 
       // Render Bảng 1: Lũy Kế
@@ -1825,21 +606,15 @@
             <tr class="hover:bg-slate-50/80 transition ${isTop3 ? 'bg-amber-50/20' : ''}">
               <td class="py-3 px-3 text-center whitespace-nowrap">${getRankBadge(idx + 1)}</td>
               <td class="py-3 px-4">
-                <div class="font-bold text-slate-900 flex items-center gap-1.5">
-                  <span>${s.name}</span>
-                </div>
+                <div class="font-bold text-slate-900">${s.name}</div>
                 <div class="text-[11px] text-slate-500 flex items-center gap-2 mt-0.5">
                   <span class="font-mono font-medium text-slate-600">Mã: ${s.code}</span>
                   <span>·</span>
                   <span class="text-bhx-green-dark font-medium">${s.tier}</span>
                 </div>
               </td>
-              <td class="py-3 px-4 text-right font-mono font-bold text-bhx-green-dark whitespace-nowrap">
-                ${formatVND(s.thucHien)}
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-slate-600 whitespace-nowrap">
-                ${formatVND(s.base)}
-              </td>
+              <td class="py-3 px-4 text-right font-mono font-bold text-bhx-green-dark whitespace-nowrap">${formatVND(s.thucHien)}</td>
+              <td class="py-3 px-4 text-right font-mono text-slate-600 whitespace-nowrap">${formatVND(s.base)}</td>
               <td class="py-3 px-4 text-center">
                 <div class="flex items-center justify-between text-xs mb-1">
                   <span class="font-bold font-mono ${pct >= 90 ? 'text-bhx-green' : 'text-slate-800'}">${pct.toFixed(2)}%</span>
@@ -1849,9 +624,7 @@
                   <div class="${barColor} h-2 rounded-full transition-all duration-500" style="width: ${Math.min(pct, 100)}%"></div>
                 </div>
               </td>
-              <td class="py-3 px-4 text-right font-mono font-semibold text-rose-600 whitespace-nowrap">
-                ${formatVND(s.conLai)}
-              </td>
+              <td class="py-3 px-4 text-right font-mono font-semibold text-rose-600 whitespace-nowrap">${formatVND(s.conLai)}</td>
             </tr>
           `;
         }).join('');
@@ -1872,7 +645,7 @@
         <td class="py-3.5 px-4 text-right font-mono text-rose-600">${formatVND(totalConLai)}</td>
       `;
 
-      // Render Bảng 2: Retime Hôm Nay
+      // Render Bảng 2: Retime
       const retimeBody = document.getElementById('table-retime-body');
       if (sortedRetime.length === 0) {
         retimeBody.innerHTML = `<tr><td colspan="6" class="py-8 text-center text-slate-400">Không tìm thấy siêu thị phù hợp điều kiện lọc</td></tr>`;
@@ -1886,18 +659,10 @@
                 <div class="font-bold text-slate-900">${s.name}</div>
                 <div class="text-[11px] text-slate-500 font-mono mt-0.5">Mã: ${s.code} · ${s.tier}</div>
               </td>
-              <td class="py-3 px-4 text-right font-mono text-slate-700 whitespace-nowrap">
-                ${formatVND(s.dtOfflineToday)}
-              </td>
-              <td class="py-3 px-4 text-right font-mono text-emerald-700 whitespace-nowrap">
-                ${formatVND(s.dtOnlineToday)}
-              </td>
-              <td class="py-3 px-4 text-right font-mono font-extrabold text-amber-800 whitespace-nowrap text-sm sm:text-base">
-                ${formatVND(s.tongDtToday)}
-              </td>
-              <td class="py-3 px-3 text-center font-mono font-bold text-slate-700">
-                ${s.totalBillsToday.toLocaleString('vi-VN')}
-              </td>
+              <td class="py-3 px-4 text-right font-mono text-slate-700 whitespace-nowrap">${formatVND(s.dtOfflineToday)}</td>
+              <td class="py-3 px-4 text-right font-mono text-emerald-700 whitespace-nowrap">${formatVND(s.dtOnlineToday)}</td>
+              <td class="py-3 px-4 text-right font-mono font-extrabold text-amber-800 whitespace-nowrap text-sm sm:text-base">${formatVND(s.tongDtToday)}</td>
+              <td class="py-3 px-3 text-center font-mono font-bold text-slate-700">${s.totalBillsToday.toLocaleString('vi-VN')}</td>
             </tr>
           `;
         }).join('');
@@ -1918,114 +683,54 @@
         <td class="py-3.5 px-3 text-center font-mono text-slate-900">${totalBills.toLocaleString('vi-VN')}</td>
       `;
 
-      // Update KPI Top stats if filter is applied
-      document.getElementById('stat-total-luyke').textContent = formatVND(totalThucHien);
-      document.getElementById('stat-total-today').textContent = formatVND(totalToday);
-      document.getElementById('stat-total-bills').innerHTML = `${totalBills.toLocaleString('vi-VN')} <span class="text-sm font-normal text-slate-500">Hóa đơn</span>`;
+      updateSummaryCards();
     }
 
     function initChart() {
       const ctx = document.getElementById('topRevenueChart').getContext('2d');
       const isLuyKe = chartMode === 'luyke';
 
-      // Top 8 stores
       const sorted = [...supermarkets].sort((a, b) => {
         return isLuyKe ? (b.thucHien - a.thucHien) : (b.tongDtToday - a.tongDtToday);
       }).slice(0, 8);
 
-      const labels = sorted.map(s => s.shortName);
+      const labels = sorted.map(s => s.shortName || s.name.slice(0, 20));
       const dataValues = sorted.map(s => isLuyKe ? s.thucHien : s.tongDtToday);
       const baseValues = sorted.map(s => s.base);
 
       const datasets = isLuyKe ? [
-        {
-          label: 'Doanh thu Thực hiện (VNĐ)',
-          data: dataValues,
-          backgroundColor: '#007738',
-          borderRadius: 6,
-          barPercentage: 0.65
-        },
-        {
-          label: 'Chỉ tiêu Base (VNĐ)',
-          data: baseValues,
-          backgroundColor: '#FFC700',
-          borderRadius: 6,
-          barPercentage: 0.65
-        }
+        { label: 'Doanh thu Thực hiện (VNĐ)', data: dataValues, backgroundColor: '#007738', borderRadius: 6, barPercentage: 0.65 },
+        { label: 'Chỉ tiêu Base (VNĐ)', data: baseValues, backgroundColor: '#FFC700', borderRadius: 6, barPercentage: 0.65 }
       ] : [
-        {
-          label: 'DT Offline Hôm nay (VNĐ)',
-          data: sorted.map(s => s.dtOfflineToday),
-          backgroundColor: '#007738',
-          borderRadius: 6,
-          stack: 'today'
-        },
-        {
-          label: 'DT Online Hôm nay (VNĐ)',
-          data: sorted.map(s => s.dtOnlineToday),
-          backgroundColor: '#FFC700',
-          borderRadius: 6,
-          stack: 'today'
-        }
+        { label: 'DT Offline Hôm nay (VNĐ)', data: sorted.map(s => s.dtOfflineToday), backgroundColor: '#007738', borderRadius: 6, stack: 'today' },
+        { label: 'DT Online Hôm nay (VNĐ)', data: sorted.map(s => s.dtOnlineToday), backgroundColor: '#FFC700', borderRadius: 6, stack: 'today' }
       ];
 
-      if (chartInstance) {
-        chartInstance.destroy();
-      }
+      if (chartInstance) chartInstance.destroy();
 
       chartInstance = new Chart(ctx, {
         type: 'bar',
-        data: {
-          labels: labels,
-          datasets: datasets
-        },
+        data: { labels, datasets },
         options: {
           responsive: true,
           maintainAspectRatio: false,
           plugins: {
             legend: {
               position: 'top',
-              labels: {
-                font: { family: '"Plus Jakarta Sans"', size: 12, weight: 600 },
-                color: '#1e293b',
-                boxWidth: 14,
-                boxHeight: 14,
-                borderRadius: 3,
-                useBorderRadius: true
-              }
+              labels: { font: { family: '"Plus Jakarta Sans"', size: 12, weight: 600 }, color: '#1e293b' }
             },
             tooltip: {
               backgroundColor: '#0f172a',
-              titleFont: { family: '"Plus Jakarta Sans"', size: 13, weight: 'bold' },
-              bodyFont: { family: '"JetBrains Mono"', size: 12 },
-              padding: 12,
-              cornerRadius: 8,
               callbacks: {
-                label: function(context) {
-                  return ` ${context.dataset.label}: ${formatVND(context.raw)}`;
-                }
+                label: function(context) { return ` ${context.dataset.label}: ${formatVND(context.raw)}`; }
               }
             }
           },
           scales: {
-            x: {
-              grid: { display: false },
-              ticks: {
-                font: { family: '"Plus Jakarta Sans"', size: 11, weight: 500 },
-                color: '#475569',
-                maxRotation: 25,
-                minRotation: 0
-              }
-            },
+            x: { grid: { display: false } },
             y: {
               grid: { color: '#f1f5f9' },
-              ticks: {
-                font: { family: '"JetBrains Mono"', size: 11 },
-                color: '#64748b',
-                callback: function(val) {
-                  return formatShortVND(val);
-                }
-              }
+              ticks: { callback: function(val) { return formatShortVND(val); } }
             }
           }
         }
@@ -2044,7 +749,6 @@
         btnToday.className = 'px-3 py-1.5 rounded-md transition shadow-xs bg-bhx-green text-white';
         btnLuyKe.className = 'px-3 py-1.5 rounded-md transition text-slate-600 hover:text-slate-900';
       }
-
       initChart();
     }
 
@@ -2065,22 +769,222 @@
       renderTables();
     }
 
-    // Auto-update live time
-    function updateClock() {
-      const now = new Date();
-      const str = now.toLocaleDateString('vi-VN') + ' · ' + now.toLocaleTimeString('vi-VN');
-      const el = document.getElementById('live-time');
-      if (el) el.textContent = str;
+    // MODAL LOGIC
+    function openImportModal() {
+      document.getElementById('import-modal').classList.remove('hidden');
+      document.getElementById('import-modal').classList.add('flex');
     }
 
-    // Init on load
+    function closeImportModal() {
+      document.getElementById('import-modal').classList.add('hidden');
+      document.getElementById('import-modal').classList.remove('flex');
+      tempParsedRows = null;
+      document.getElementById('modal-preview-section').classList.add('hidden');
+      document.getElementById('modal-alert').classList.add('hidden');
+      document.getElementById('modal-apply-btn').disabled = true;
+    }
+
+    function switchImportTab(tab) {
+      ['paste', 'file', 'gsheet'].forEach(t => {
+        const tabBtn = document.getElementById(`modal-tab-${t}`);
+        const content = document.getElementById(`import-content-${t}`);
+        if (t === tab) {
+          tabBtn.className = 'px-3 py-1.5 rounded-lg bg-bhx-green text-white shadow-xs';
+          content.classList.remove('hidden');
+        } else {
+          tabBtn.className = 'px-3 py-1.5 rounded-lg text-slate-600 hover:bg-slate-200';
+          content.classList.add('hidden');
+        }
+      });
+    }
+
+    function parseRawRows(rows) {
+      const valid = rows.filter(r => r && r.length > 0 && r.some(c => c !== '' && c !== null && c !== undefined));
+      if (!valid.length) throw new Error('Không có dữ liệu hợp lệ');
+
+      let startIdx = 0;
+      const first0 = String(valid[0][0] || '').toLowerCase();
+      if (first0.includes('ngày') || first0.includes('mã') || first0.includes('stt') || isNaN(Number(valid[0][0]))) {
+        startIdx = 1;
+      }
+
+      const parseNum = (v) => {
+        if (!v) return 0;
+        const clean = String(v).replace(/[^0-9.-]/g, '');
+        const p = parseFloat(clean);
+        return isNaN(p) ? 0 : p;
+      };
+
+      const result = [];
+      for (let i = startIdx; i < valid.length; i++) {
+        const row = valid[i];
+        if (row.length < 2) continue;
+
+        const str0 = String(row[0] || '').trim();
+        const str1 = String(row[1] || '').trim();
+        const codeMatch = (str0 + ' ' + str1).match(/\b\d{4,5}\b/);
+        const code = codeMatch ? codeMatch[0] : `ST${i}`;
+        let name = str1.length > 5 ? str1 : str0;
+        if (!name.includes(code)) name = `${code} - ${name}`;
+
+        const nums = [];
+        for (let j = 0; j < row.length; j++) {
+          const n = parseNum(row[j]);
+          if (n > 0) nums.push(n);
+        }
+
+        let base = 0, thucHien = 0, dtOffline = 0, dtOnline = 0, bills = 300;
+        if (nums.length >= 4) {
+          const sorted = [...nums].sort((a, b) => b - a);
+          base = sorted[0] > 500000000 ? sorted[0] : 1200000000;
+          thucHien = sorted[1] > 200000000 ? sorted[1] : Math.round(base * 0.88);
+          dtOffline = sorted[2] > 10000000 ? sorted[2] : 35000000;
+          dtOnline = sorted[3] > 500000 ? sorted[3] : 5000000;
+          bills = sorted.find(n => n > 50 && n < 2000) || 300;
+        } else {
+          base = parseNum(row[3]) || 1200000000;
+          thucHien = parseNum(row[2]) || Math.round(base * 0.88);
+          dtOffline = parseNum(row[4]) || 35000000;
+          dtOnline = parseNum(row[5]) || 5000000;
+        }
+
+        const pct = base > 0 ? (thucHien / base * 100) : 0;
+        const conLai = Math.max(0, base - thucHien);
+        let tier = base >= 2200000000 ? '5 Tỷ -> <8 Tỷ' : base >= 1400000000 ? '3 Tỷ -> <5 Tỷ' : '1.2 Tỷ -> <2 Tỷ';
+
+        result.push({
+          code,
+          name,
+          shortName: name.replace(/^.*-\s*/, '').slice(0, 25),
+          tier,
+          thucHien,
+          base,
+          percentComplete: parseFloat(pct.toFixed(2)),
+          conLai,
+          dtOfflineToday: dtOffline,
+          dtOnlineToday: dtOnline,
+          tongDtToday: dtOffline + dtOnline,
+          totalBillsToday: Math.round(bills)
+        });
+      }
+
+      if (!result.length) throw new Error('Không phân tích được danh sách siêu thị');
+      return result;
+    }
+
+    function showModalAlert(msg, isError) {
+      const el = document.getElementById('modal-alert');
+      el.className = isError 
+        ? 'p-3 bg-rose-50 border border-rose-200 text-rose-700 rounded-xl' 
+        : 'p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl';
+      el.textContent = msg;
+      el.classList.remove('hidden');
+    }
+
+    function showModalPreview(parsed) {
+      tempParsedRows = parsed;
+      document.getElementById('modal-preview-title').textContent = `Bản xem trước (${parsed.length} Siêu thị)`;
+      const total = parsed.reduce((a, b) => a + b.thucHien, 0);
+      document.getElementById('modal-preview-total').textContent = `Tổng DT Lũy Kế: ${formatVND(total)}`;
+
+      const body = document.getElementById('modal-preview-body');
+      body.innerHTML = parsed.map((r, i) => `
+        <tr class="hover:bg-slate-50">
+          <td class="p-2 text-center text-slate-400 font-mono">${i + 1}</td>
+          <td class="p-2 font-medium text-slate-900">${r.name}</td>
+          <td class="p-2 text-right font-mono text-bhx-green-dark font-semibold">${formatVND(r.thucHien)}</td>
+          <td class="p-2 text-right font-mono text-slate-600">${formatVND(r.base)}</td>
+          <td class="p-2 text-center font-mono font-bold text-emerald-700">${r.percentComplete}%</td>
+          <td class="p-2 text-right font-mono text-amber-800 font-bold">${formatVND(r.tongDtToday)}</td>
+        </tr>
+      `).join('');
+
+      document.getElementById('modal-preview-section').classList.remove('hidden');
+      document.getElementById('modal-apply-btn').disabled = false;
+      showModalAlert(`Đã đọc thành công ${parsed.length} siêu thị! Nhấn "Áp Dụng Dữ Liệu Này" để cập nhật lên Dashboard.`, false);
+    }
+
+    function parsePastedText() {
+      const text = document.getElementById('modal-paste-area').value.trim();
+      if (!text) return showModalAlert('Vui lòng dán dữ liệu vào ô phía trên', true);
+      try {
+        const lines = text.split(/\r\n|\n|\r/);
+        const rows = lines.map(line => line.includes('\t') ? line.split('\t') : line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/));
+        const parsed = parseRawRows(rows);
+        showModalPreview(parsed);
+      } catch (e) {
+        showModalAlert(e.message, true);
+      }
+    }
+
+    function handleExcelFileUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const data = new Uint8Array(e.target.result);
+          const workbook = XLSX.read(data, { type: 'array' });
+          const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+          const rows = XLSX.utils.sheet_to_json(firstSheet, { header: 1 });
+          const parsed = parseRawRows(rows);
+          showModalPreview(parsed);
+        } catch (err) {
+          showModalAlert('Lỗi đọc file Excel: ' + err.message, true);
+        }
+      };
+      reader.readAsArrayBuffer(file);
+    }
+
+    async function fetchGoogleSheetData() {
+      const url = document.getElementById('modal-gsheet-input').value.trim();
+      if (!url) return showModalAlert('Vui lòng nhập đường link Google Sheets', true);
+      try {
+        let csvUrl = url;
+        if (csvUrl.includes('/edit')) csvUrl = csvUrl.replace(/\/edit.*$/, '/export?format=csv');
+        else if (!csvUrl.includes('export?format=csv')) csvUrl += (csvUrl.includes('?') ? '&' : '?') + 'format=csv';
+
+        const res = await fetch(csvUrl);
+        if (!res.ok) throw new Error('Không thể tải link. Hãy kiểm tra quyền "Bất kỳ ai có liên kết đều có thể xem".');
+        const text = await res.text();
+        const lines = text.trim().split(/\r\n|\n|\r/);
+        const rows = lines.map(l => l.split(','));
+        const parsed = parseRawRows(rows);
+        showModalPreview(parsed);
+      } catch (err) {
+        showModalAlert(err.message, true);
+      }
+    }
+
+    function applyParsedData() {
+      if (!tempParsedRows || !tempParsedRows.length) return;
+      supermarkets = tempParsedRows;
+      reportDateStr = document.getElementById('modal-date-input').value.trim() || reportDateStr;
+      localStorage.setItem('bhx_supermarket_data', JSON.stringify(supermarkets));
+      localStorage.setItem('bhx_report_date', reportDateStr);
+      document.getElementById('custom-data-badge').classList.remove('hidden');
+      closeImportModal();
+      renderTables();
+      initChart();
+    }
+
+    function resetToOriginalData() {
+      if (confirm('Bạn có chắc chắn muốn khôi phục về dữ liệu gốc ban đầu?')) {
+        localStorage.removeItem('bhx_supermarket_data');
+        localStorage.removeItem('bhx_report_date');
+        supermarkets = [...DEFAULT_SUPERMARKETS];
+        reportDateStr = "25/03/2026";
+        document.getElementById('custom-data-badge').classList.add('hidden');
+        closeImportModal();
+        renderTables();
+        initChart();
+      }
+    }
+
     window.addEventListener('DOMContentLoaded', () => {
       renderTables();
       initChart();
-      updateClock();
-      setInterval(updateClock, 1000);
     });
   </script>
-
-
-</body></html>
+</body>
+</html>
